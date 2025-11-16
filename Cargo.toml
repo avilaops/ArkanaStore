@@ -1,0 +1,72 @@
+[workspace]
+resolver = "2"
+members = [
+    "arkana-backend",
+    "arkana-frontend", 
+    "arkana-shared",
+]
+
+[workspace.package]
+version = "1.0.0"
+edition = "2021"
+authors = ["Ávila Inc <dev@avila.inc>"]
+license = "MIT"
+repository = "https://github.com/avilaops/arkana-store"
+
+[workspace.dependencies]
+# Async runtime
+tokio = { version = "1.35", features = ["full"] }
+async-trait = "0.1"
+
+# Web framework
+actix-web = "4.4"
+actix-cors = "0.7"
+
+# Serialization
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+# Database
+sqlx = { version = "0.7", features = ["runtime-tokio-rustls", "postgres", "chrono", "uuid"] }
+mongodb = "2.8"
+
+# Payment gateways
+stripe-rust = "0.26"
+reqwest = { version = "0.11", features = ["json", "rustls-tls"] }
+
+# Auth & Security
+jsonwebtoken = "9.2"
+bcrypt = "0.15"
+uuid = { version = "1.6", features = ["serde", "v4"] }
+
+# Logging
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+sentry = "0.32"
+
+# Config
+dotenv = "0.15"
+config = "0.14"
+
+# Frontend (WASM)
+yew = { version = "0.21", features = ["csr"] }
+yew-router = "0.18"
+wasm-bindgen = "0.2"
+wasm-bindgen-futures = "0.4"
+web-sys = { version = "0.3", features = ["HtmlInputElement", "Storage", "Window"] }
+gloo = "0.11"
+gloo-net = "0.5"
+
+# Shared
+chrono = { version = "0.4", features = ["serde"] }
+thiserror = "1.0"
+
+[profile.release]
+opt-level = "z"     # Optimize for size
+lto = true          # Link-time optimization
+codegen-units = 1   # Better optimization
+panic = "abort"     # Smaller binary
+strip = true        # Remove debug symbols
+
+[profile.release.package."*"]
+opt-level = "z"

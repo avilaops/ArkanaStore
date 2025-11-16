@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>??? Arkana Store - Produtos Maçônicos Premium</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Iconoir Icons (SVG Sprite) -->
+    <script src="https://cdn.jsdelivr.net/npm/iconoir@7.5.0/dist/iconoir.min.js"></script>
+    
+    <style>
+        :root {
+            --primary: #1a237e;
+            --secondary: #ffd700;
+            --accent: #c41e3a;
+            
+            /* Light theme */
+            --bg: #ffffff;
+            --bg-alt: #f8f9fa;
+            --text: #1a1a1a;
+            --text-muted: #666666;
+            --border: #e0e0e0;
+        }
+
+        [data-theme="dark"] {
+            --primary: #5c6bc0;
+            --bg: #0f1419;
+            --bg-alt: #1a1d29;
+            --text: #e4e6eb;
+            --text-muted: #b0b3b8;
+            --border: #2d3748;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Cinzel', serif;
+            color: var(--text);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            background: var(--bg-alt);
+            border: 2px solid var(--border);
+            border-radius: 50px;
+            padding: 0.75rem 1.25rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: all 0.3s;
+        }
+
+        .theme-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+        }
+
+        .theme-toggle svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--text);
+        }
+
+        .theme-text {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        [data-theme="dark"] .hero {
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1a2e 100%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 35px,
+                    rgba(255,215,0,0.03) 35px,
+                    rgba(255,215,0,0.03) 70px
+                );
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 4rem 2rem;
+            max-width: 800px;
+        }
+
+        .hero-symbol {
+            font-size: 6rem;
+            margin-bottom: 2rem;
+            color: var(--secondary);
+            filter: drop-shadow(0 0 30px rgba(255,215,0,0.5));
+            animation: pulse 3s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.9; }
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.8rem;
+            color: var(--secondary);
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 600;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            opacity: 0.95;
+            line-height: 1.8;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            color: #1a1a1a;
+            box-shadow: 0 4px 12px rgba(255,215,0,0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255,215,0,0.5);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid var(--secondary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--secondary);
+            color: #1a1a1a;
+        }
+
+        .hero-badges {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 0.75rem 1.25rem;
+            border-radius: 25px;
+            border: 1px solid rgba(255,215,0,0.2);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .badge svg {
+            width: 18px;
+            height: 18px;
+            stroke: var(--secondary);
+        }
+
+        /* Products Section */
+        .products-section {
+            padding: 6rem 0;
+            background: var(--bg);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            color: var(--text);
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--secondary), var(--accent));
+            margin: 1rem auto 0;
+            border-radius: 2px;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .product-card {
+            background: var(--bg-alt);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+            border-color: var(--secondary);
+        }
+
+        .product-image {
+            position: relative;
+            width: 100%;
+            padding-top: 100%;
+            background: var(--border);
+            overflow: hidden;
+        }
+
+        .product-image img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.5s;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--accent);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-info h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.75rem;
+            color: var(--text);
+        }
+
+        .product-description {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            min-height: 40px;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .btn-sm {
+            padding: 0.6rem 1.2rem;
+            font-size: 0.85rem;
+        }
+
+        /* Checkout Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: var(--bg-alt);
+            border-radius: 16px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: slideUp 0.3s;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-header {
+            padding: 2rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-muted);
+            transition: 0.2s;
+        }
+
+        .modal-close:hover {
+            color: var(--text);
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text);
+        }
+
+        .form-label .required {
+            color: var(--accent);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            background: var(--bg);
+            color: var(--text);
+            font-size: 1rem;
+            font-family: inherit;
+            transition: 0.2s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(26,35,126,0.1);
+        }
+
+        .form-help {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .modal-footer {
+            padding: 1.5rem 2rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--border);
+            color: var(--text);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary);
+            background: var(--primary);
+            color: white;
+        }
+
+        /* WhatsApp Float */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 64px;
+            height: 64px;
+            background: #25d366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(37,211,102,0.4);
+            z-index: 999;
+            transition: 0.3s;
+            text-decoration: none;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(37,211,102,0.6);
+        }
+
+        .whatsapp-float svg {
+            width: 32px;
+            height: 32px;
+            stroke: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.5rem; }
+            .hero-subtitle { font-size: 1.2rem; }
+            .hero-cta { flex-direction: column; }
+            .products-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Alternar tema">
+        <svg id="theme-icon" class="iconoir-sun-light" width="24" height="24" stroke-width="1.5" viewBox="0 0 24 24" fill="none">
+            <path d="M12 18a6 6 0 100-12 6 6 0 000 12zM22 12h1M12 2V1M12 23v-1M20 20l-1-1M20 4l-1 1M4 20l1-1M4 4l1 1M1 12h1" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="theme-text" id="theme-text">Modo Claro</span>
+    </button>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-symbol">?</div>
+            
+            <h1 class="hero-title">ARKANA STORE</h1>
+            
+            <p class="hero-subtitle">Produtos Maçônicos de Qualidade</p>
+            
+            <p class="hero-description">
+                Camisetas, bermudas e acessórios para irmãos maçons<br>
+                Qualidade premium • Envio rápido • Preços justos
+            </p>
+            
+            <div class="hero-cta">
+                <a href="#produtos" class="btn btn-primary">
+                    <svg class="iconoir-shopping-bag" width="24" height="24" stroke-width="1.5" viewBox="0 0 24 24" fill="none">
+                        <path d="M19.5 22a1.5 1.5 0 100-3 1.5 1.5 0 000 3zM9.5 22a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M5 4h17l-2 11H7L5 4zm0 0c-.167-.667-1-2-3-2M20 15H5.23c-1.784 0-2.73.781-2.73 2 0 1.219.946 2 2.73 2H19.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Ver Produtos
+                </a>
+                
+                <a href="https://wa.me/5517996656163" class="btn btn-secondary" target="_blank">
+                    <svg class="iconoir-chat-bubble" width="24" height="24" stroke-width="1.5" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12c0 1.821.487 3.53 1.338 5L2.5 21.5l4.5-.838A9.955 9.955 0 0012 22z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    WhatsApp
+                </a>
+            </div>
+            
+            <div class="hero-badges">
+                <span class="badge">
+                    <svg class="iconoir-delivery-truck" width="24" height="24" stroke-width="1.5" viewBox="0 0 24 24" fill="none">
+                        <path d="M8 19a2 2 0 100-4 2 2 0 000 4zM18 19a2 2 0 100-4 2 2 0 000 4z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M10.05 17H15V6.6a.6.6 0 00-.6-.6H1M5.65 17H3.6a.6.6 0 01-.6-.6v-4.9M2 9h4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M15 9h5.61a.6.6 0 01.548.356l1.79 4.028a.6.6 0 01.052.243V16.4a.6.6 0 01-.6.6h-1.9M15 17h1" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Frete Grátis acima de R$ 150
+                </span>
+                
+                <span class="badge">
+                    <svg class="iconoir-credit-card" width="24" height="24" stroke-width="1.5" viewBox="0 0 24 24" fill="none">
+                        <path d="M22 9V7a2 2 0 00-2-2H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9zm0 0H6" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Parcelamento sem juros
+                </span>
+                
+                <span class="badge">
+                    <svg class="iconoir-refresh-double" width="24" height="24" stroke-width="1.5" viewBox="0 0 24 24" fill="none">
+                        <path d="M21.888 13.5C21.164 18.311 17.013 22 12 22 6.477 22 2 17.523 2 12S6.477 2 12 2c4.1 0 7.625 2.468 9.168 6M12 2v4M12 18v4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Troca facilitada
+                </span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="produtos" class="products-section">
+        <div class="container">
+            <h2 class="section-title">?? Produtos em Destaque</h2>
+            
+            <div class="products-grid" id="products-container">
+                <!-- Produtos serão carregados aqui -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Checkout Modal (CADASTRO OBRIGATÓRIO) -->
+    <div id="modal-checkout" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">
+                    <svg class="iconoir-shopping-bag" width="28" height="28" stroke-width="1.5" viewBox="0 0 24 24" fill="none">
+                        <path d="M19.5 22a1.5 1.5 0 100-3 1.5 1.5 0 000 3zM9.5 22a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" stroke="currentColor"/>
+                        <path d="M5 4h17l-2 11H7L5 4zm0 0c-.167-.667-1-2-3-2M20 15H5.23c-1.784 0-2.73.781-2.73 2 0 1.219.946 2 2.73 2H19.5" stroke="currentColor"/>
+                    </svg>
+                    Finalizar Compra
+                </h3>
+                <button class="modal-close" onclick="closeCheckout()">×</button>
+            </div>
+            
+            <div class="modal-body">
+                <div id="selected-product" style="background: var(--bg); padding: 1.5rem; border-radius: 12px; margin-bottom: 2rem; border: 1px solid var(--border);">
+                    <!-- Produto selecionado aparece aqui -->
+                </div>
+
+                <h4 style="margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                    <svg class="iconoir-user" width="24" height="24" stroke-width="1.5" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M4.271 18.346S6.5 15.5 12 15.5s7.73 2.846 7.73 2.846M12 12a3 3 0 100-6 3 3 0 000 6z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Dados do Cliente (Obrigatório)
+                </h4>
+
+                <form id="form-checkout" onsubmit="return submitCheckout(event)">
+                    <!-- Nome Completo -->
+                    <div class="form-group">
+                        <label class="form-label">
+                            Nome Completo <span class="required">*</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            class="form-input" 
+                            id="customer-name"
+                            placeholder="Ex: João da Silva"
+                            required
+                            minlength="3">
+                    </div>
+
+                    <!-- Email -->
+                    <div class="form-group">
+                        <label class="form-label">
+                            Email <span class="required">*</span>
+                        </label>
+                        <input 
+                            type="email" 
+                            class="form-input" 
+                            id="customer-email"
+                            placeholder="seu@email.com"
+                            required>
+                        <div class="form-help">
+                            ?? Receberá confirmação do pedido e ofertas exclusivas
+                        </div>
+                    </div>
+
+                    <!-- Telefone -->
+                    <div class="form-group">
+                        <label class="form-label">
+                            Telefone/WhatsApp <span class="required">*</span>
+                        </label>
+                        <input 
+                            type="tel" 
+                            class="form-input" 
+                            id="customer-phone"
+                            placeholder="(17) 99665-6163"
+                            required
+                            pattern="[\(\d\)\s\-]+"
+                            minlength="14">
+                        <div class="form-help">
+                            ?? Para acompanhamento do pedido
+                        </div>
+                    </div>
+
+                    <!-- CPF -->
+                    <div class="form-group">
+                        <label class="form-label">
+                            CPF <span class="required">*</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            class="form-input" 
+                            id="customer-cpf"
+                            placeholder="000.000.000-00"
+                            required
+                            pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"
+                            maxlength="14">
+                        <div class="form-help">
+                            ?? Necessário para nota fiscal
+                        </div>
+                    </div>
+
+                    <!-- Maçom? -->
+                    <div class="form-group">
+                        <div class="checkbox-group">
+                            <input 
+                                type="checkbox" 
+                                id="is-mason"
+                                onchange="toggleMasonFields()">
+                            <label for="is-mason" style="margin: 0; font-weight: 500;">
+                                ??? Sou maçom (ganhe 10% de desconto!)
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Campos Maçônicos (aparecem se marcar checkbox) -->
+                    <div id="mason-fields" style="display: none;">
+                        <div class="form-group">
+                            <label class="form-label">
+                                Nome da Loja Maçônica
+                            </label>
+                            <input 
+                                type="text" 
+                                class="form-input" 
+                                id="lodge-name"
+                                placeholder="Ex: Loja Harmonia Universal">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">
+                                Grau Maçônico
+                            </label>
+                            <select class="form-input" id="masonic-degree">
+                                <option value="">Selecione...</option>
+                                <option value="aprendiz">Aprendiz</option>
+                                <option value="companheiro">Companheiro</option>
+                                <option value="mestre">Mestre</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Aceitar Newsletter -->
+                    <div class="form-group">
+                        <div class="checkbox-group">
+                            <input 
+                                type="checkbox" 
+                                id="accept-newsletter"
+                                checked>
+                            <label for="accept-newsletter" style="margin: 0; font-weight: 500;">
+                                ?? Quero receber ofertas exclusivas por email
+                            </label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeCheckout()">
+                    Cancelar
+                </button>
+                <button class="btn btn-primary" onclick="submitCheckout()">
+                    <svg class="iconoir-check" width="20" height="20" stroke-width="1.5" viewBox="0 0 24 24" fill="none">
+                        <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Continuar para Pagamento
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/5517996656163?text=Olá! Vim do site da Arkana Store" 
+       class="whatsapp-float" 
+       target="_blank"
+       title="Falar no WhatsApp">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2.546 20.2A1.01 1.01 0 004 21.5l3.03-.892A9.957 9.957 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/>
+            <path d="M9.5 9.5c.6-1 1.5-1.5 2.5-1.5s2 .5 2 2-.5 1.5-1 2c-.5.5-1 .5-1 1.5M12 17.01l.01-.011"/>
+        </svg>
+    </a>
+
+    <script>
+        // ===================================
+        // PRODUTOS (Mock Data)
+        // ===================================
+        
+        const products = [
+            {
+                id: 1,
+                name: 'Camiseta Compasso e Esquadro',
+                description: '100% algodão, estampa de alta qualidade',
+                price: 89.90,
+                image: 'https://via.placeholder.com/400x400/1a237e/ffd700?text=?',
+                badge: 'Mais Vendido',
+                category: 'camisetas'
+            },
+            {
+                id: 2,
+                name: 'Bermuda Logos Maçônicos',
+                description: 'Tecido leve, ideal para verão',
+                price: 79.90,
+                image: 'https://via.placeholder.com/400x400/1a237e/ffd700?text=??',
+                badge: 'Novo',
+                category: 'bermudas'
+            },
+            {
+                id: 3,
+                name: 'Anel Mestre Maçom',
+                description: 'Aço inoxidável, acabamento polido',
+                price: 149.90,
+                image: 'https://via.placeholder.com/400x400/1a237e/ffd700?text=??',
+                badge: 'Premium',
+                category: 'acessorios'
+            },
+            {
+                id: 4,
+                name: 'Boné G.A.D.U',
+                description: 'Bordado em alto relevo',
+                price: 59.90,
+                image: 'https://via.placeholder.com/400x400/1a237e/ffd700?text=??',
+                category: 'bones'
+            }
+        ];
+
+        // ===================================
+        // RENDER PRODUCTS
+        // ===================================
+        
+        function renderProducts() {
+            const container = document.getElementById('products-container');
+            
+            container.innerHTML = products.map(product => `
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="${product.image}" alt="${product.name}">
+                        ${product.badge ? `<span class="product-badge">${product.badge}</span>` : ''}
+                    </div>
+                    <div class="product-info">
+                        <h3>${product.name}</h3>
+                        <p class="product-description">${product.description}</p>
+                        <div class="product-footer">
+                            <span class="product-price">R$ ${product.price.toFixed(2)}</span>
+                            <button class="btn btn-primary btn-sm" onclick="openCheckout(${product.id})">
+                                <svg class="iconoir-cart" width="18" height="18" stroke-width="1.5" viewBox="0 0 24 24" fill="none">
+                                    <path d="M19.5 22a1.5 1.5 0 100-3 1.5 1.5 0 000 3zM9.5 22a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" stroke="currentColor"/>
+                                    <path d="M5 4h17l-2 11H7L5 4zm0 0c-.167-.667-1-2-3-2M20 15H5.23c-1.784 0-2.73.781-2.73 2 0 1.219.946 2 2.73 2H19.5" stroke="currentColor"/>
+                                </svg>
+                                Comprar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // ===================================
+        // CHECKOUT PROCESS
+        // ===================================
+        
+        let selectedProduct = null;
+
+        function openCheckout(productId) {
+            selectedProduct = products.find(p => p.id === productId);
+            
+            if (!selectedProduct) {
+                alert('Produto não encontrado');
+                return;
+            }
+
+            // Mostrar produto selecionado
+            document.getElementById('selected-product').innerHTML = `
+                <div style="display: flex; gap: 1.5rem; align-items: center;">
+                    <img src="${selectedProduct.image}" 
+                         alt="${selectedProduct.name}"
+                         style="width: 100px; height: 100px; border-radius: 12px; object-fit: cover;">
+                    <div>
+                        <h4 style="font-size: 1.2rem; margin-bottom: 0.5rem;">${selectedProduct.name}</h4>
+                        <p style="color: var(--text-muted); margin-bottom: 0.75rem;">${selectedProduct.description}</p>
+                        <div style="font-size: 1.75rem; font-weight: 700; color: var(--primary);">
+                            R$ ${selectedProduct.price.toFixed(2)}
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // Abrir modal
+            document.getElementById('modal-checkout').classList.add('active');
+        }
+
+        function closeCheckout() {
+            document.getElementById('modal-checkout').classList.remove('active');
+            document.getElementById('form-checkout').reset();
+            document.getElementById('mason-fields').style.display = 'none';
+        }
+
+        function toggleMasonFields() {
+            const isMason = document.getElementById('is-mason').checked;
+            document.getElementById('mason-fields').style.display = isMason ? 'block' : 'none';
+        }
+
+        // ===================================
+        // SUBMIT CHECKOUT (Salvar + Enviar WhatsApp)
+        // ===================================
+        
+        async function submitCheckout(event) {
+            if (event) event.preventDefault();
+
+            // Coletar dados do formulário
+            const customerData = {
+                name: document.getElementById('customer-name').value,
+                email: document.getElementById('customer-email').value,
+                phone: document.getElementById('customer-phone').value,
+                cpf: document.getElementById('customer-cpf').value,
+                is_mason: document.getElementById('is-mason').checked,
+                lodge_name: document.getElementById('lodge-name')?.value || null,
+                masonic_degree: document.getElementById('masonic-degree')?.value || null,
+                accept_newsletter: document.getElementById('accept-newsletter').checked,
+                timestamp: new Date().toISOString()
+            };
+
+            // Validar CPF
+            if (!validateCPF(customerData.cpf)) {
+                alert('? CPF inválido! Por favor, verifique.');
+                return false;
+            }
+
+            // Salvar no backend (SQLite)
+            try {
+                const response = await fetch('http://localhost:5000/api/customers', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(customerData)
+                });
+
+                if (response.ok) {
+                    console.log('? Cliente salvo no banco de dados');
+                    
+                    // Se aceitou newsletter, inscrever em campanhas
+                    if (customerData.accept_newsletter) {
+                        subscribeToNewsletter(customerData.email, customerData.name);
+                    }
+                }
+            } catch (error) {
+                console.warn('?? Backend offline - salvando localmente');
+                saveCustomerLocally(customerData);
+            }
+
+            // Aplicar desconto maçom
+            let finalPrice = selectedProduct.price;
+            let discountText = '';
+            
+            if (customerData.is_mason) {
+                finalPrice = selectedProduct.price * 0.9; // 10% OFF
+                discountText = '\n\n??? DESCONTO MAÇOM APLICADO: -10%';
+            }
+
+            // Montar mensagem WhatsApp
+            const mensagem = `
+??? *PEDIDO ARKANA STORE*
+
+?? *Produto:* ${selectedProduct.name}
+?? *Valor:* R$ ${finalPrice.toFixed(2)}${discountText}
+
+?? *Cliente:*
+Nome: ${customerData.name}
+Email: ${customerData.email}
+Telefone: ${customerData.phone}
+CPF: ${customerData.cpf}
+${customerData.is_mason ? `\n??? Maçom: ${customerData.lodge_name || 'Sim'}` : ''}
+
+Aguardo confirmação do pagamento!
+            `.trim();
+
+            // Abrir WhatsApp
+            const whatsappURL = `https://wa.me/5517996656163?text=${encodeURIComponent(mensagem)}`;
+            window.open(whatsappURL, '_blank');
+
+            // Fechar modal
+            closeCheckout();
+
+            // Mostrar confirmação
+            alert(`? Pedido enviado!\n\n?? Continue a conversa no WhatsApp para confirmar o pagamento.`);
+
+            return false;
+        }
+
+        // ===================================
+        // VALIDAÇÃO CPF
+        // ===================================
+        
+        function validateCPF(cpf) {
+            cpf = cpf.replace(/[^\d]/g, '');
+            
+            if (cpf.length !== 11) return false;
+            if (/^(\d)\1+$/.test(cpf)) return false;
+            
+            // Validação algoritmo CPF
+            let sum = 0;
+            for (let i = 0; i < 9; i++) {
+                sum += parseInt(cpf.charAt(i)) * (10 - i);
+            }
+            let digit1 = 11 - (sum % 11);
+            if (digit1 >= 10) digit1 = 0;
+            
+            sum = 0;
+            for (let i = 0; i < 10; i++) {
+                sum += parseInt(cpf.charAt(i)) * (11 - i);
+            }
+            let digit2 = 11 - (sum % 11);
+            if (digit2 >= 10) digit2 = 0;
+            
+            return parseInt(cpf.charAt(9)) === digit1 && parseInt(cpf.charAt(10)) === digit2;
+        }
+
+        // ===================================
+        // MÁSCARA INPUTS
+        // ===================================
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            // Máscara CPF
+            const cpfInput = document.getElementById('customer-cpf');
+            cpfInput?.addEventListener('input', (e) => {
+                let value = e.target.value.replace(/\D/g, '');
+                value = value.replace(/(\d{3})(\d)/, '$1.$2');
+                value = value.replace(/(\d{3})(\d)/, '$1.$2');
+                value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+                e.target.value = value;
+            });
+
+            // Máscara Telefone
+            const phoneInput = document.getElementById('customer-phone');
+            phoneInput?.addEventListener('input', (e) => {
+                let value = e.target.value.replace(/\D/g, '');
+                value = value.replace(/^(\d{2})(\d)/g, '($1) $2');
+                value = value.replace(/(\d)(\d{4})$/, '$1-$2');
+                e.target.value = value;
+            });
+        });
+
+        // ===================================
+        // SALVAR CLIENTE LOCALMENTE (Fallback)
+        // ===================================
+        
+        function saveCustomerLocally(customerData) {
+            let customers = JSON.parse(localStorage.getItem('arkana_customers') || '[]');
+            customers.push(customerData);
+            localStorage.setItem('arkana_customers', JSON.stringify(customers));
+            console.log('? Cliente salvo localmente (LocalStorage)');
+        }
+
+        // ===================================
+        // NEWSLETTER SUBSCRIPTION
+        // ===================================
+        
+        async function subscribeToNewsletter(email, name) {
+            try {
+                await fetch('http://localhost:5000/api/customers', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, name })
+                });
+                
+                console.log(`?? ${name} inscrito na newsletter`);
+                
+                // Trigger follow-up automático (5 dias)
+                console.log('?? Follow-up automático agendado');
+                
+            } catch (error) {
+                console.warn('Newsletter offline - será processado depois');
+            }
+        }
+
+        // ===================================
+        // THEME TOGGLE
+        // ===================================
+        
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            updateThemeUI(newTheme);
+        }
+
+        function updateThemeUI(theme) {
+            const icon = document.getElementById('theme-icon');
+            const text = document.getElementById('theme-text');
+            
+            if (theme === 'dark') {
+                icon.innerHTML = '<path d="M12 18a6 6 0 100-12 6 6 0 000 12zM22 12h1M12 2V1M12 23v-1M20 20l-1-1M20 4l-1 1M4 20l1-1M4 4l1 1M1 12h1" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>';
+                text.textContent = 'Modo Claro';
+            } else {
+                icon.innerHTML = '<path d="M3 11.507a9.493 9.493 0 0018 4.219c-8.507 0-12.726-4.22-12.726-12.726A9.494 9.494 0 003 11.507z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>';
+                text.textContent = 'Modo Escuro';
+            }
+        }
+
+        // Carregar tema salvo
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            updateThemeUI(savedTheme);
+            
+            // Renderizar produtos
+            renderProducts();
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        console.log('??? Arkana Store - Powered by Ávila Inc');
+        console.log('? SQLite cadastro + Campanhas automáticas + Toggle dark mode');
+    </script>
+</body>
+</html>

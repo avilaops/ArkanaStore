@@ -1,0 +1,1403 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>??? Arkana Admin - Painel de Controle</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/iconoir-icons/iconoir@main/css/iconoir.css">
+    
+    <style>
+        :root {
+            --sidebar-width: 280px;
+            --header-height: 70px;
+            
+            /* Light mode */
+            --bg-primary: #f8f9fa;
+            --bg-secondary: #ffffff;
+            --bg-tertiary: #e9ecef;
+            --text-primary: #212529;
+            --text-secondary: #6c757d;
+            --border-color: #dee2e6;
+            
+            --color-primary: #1a237e;
+            --color-success: #28a745;
+            --color-danger: #dc3545;
+            --color-warning: #ffc107;
+            --color-info: #17a2b8;
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #1a1d29;
+            --bg-secondary: #242938;
+            --bg-tertiary: #2f3349;
+            --text-primary: #e4e6eb;
+            --text-secondary: #b0b3b8;
+            --border-color: #3e4152;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            transition: background 0.3s, color 0.3s;
+        }
+
+        /* LAYOUT */
+        .admin-layout {
+            display: grid;
+            grid-template-areas: 
+                "sidebar header"
+                "sidebar main";
+            grid-template-columns: var(--sidebar-width) 1fr;
+            grid-template-rows: var(--header-height) 1fr;
+            min-height: 100vh;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            grid-area: sidebar;
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border-color);
+            padding: 2rem 0;
+            position: fixed;
+            width: var(--sidebar-width);
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .sidebar-logo {
+            padding: 0 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .sidebar-logo h1 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .sidebar-nav {
+            list-style: none;
+        }
+
+        .sidebar-nav-item {
+            margin-bottom: 0.25rem;
+        }
+
+        .sidebar-nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1.5rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .sidebar-nav-link:hover,
+        .sidebar-nav-link.active {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border-left: 3px solid var(--color-primary);
+        }
+
+        .sidebar-nav-link i {
+            font-size: 1.2rem;
+        }
+
+        /* HEADER */
+        .header {
+            grid-area: header;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-search {
+            flex: 1;
+            max-width: 500px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.75rem 1rem 0.75rem 3rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            font-size: 0.9rem;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .theme-toggle {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: 0.2s;
+        }
+
+        .theme-toggle:hover {
+            background: var(--bg-primary);
+        }
+
+        /* MAIN CONTENT */
+        .main-content {
+            grid-area: main;
+            padding: 2rem;
+            margin-left: var(--sidebar-width);
+        }
+
+        .page-header {
+            margin-bottom: 2rem;
+        }
+
+        .page-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .page-subtitle {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        /* CARDS */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: 0.2s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .stat-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .stat-card-title {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .stat-card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .stat-card-icon.primary { background: rgba(26, 35, 126, 0.1); color: var(--color-primary); }
+        .stat-card-icon.success { background: rgba(40, 167, 69, 0.1); color: var(--color-success); }
+        .stat-card-icon.danger { background: rgba(220, 53, 69, 0.1); color: var(--color-danger); }
+        .stat-card-icon.warning { background: rgba(255, 193, 7, 0.1); color: var(--color-warning); }
+
+        .stat-card-value {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-card-change {
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .stat-card-change.positive { color: var(--color-success); }
+        .stat-card-change.negative { color: var(--color-danger); }
+
+        /* TABLE */
+        .table-container {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .table-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .table-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 1rem 1.5rem;
+            text-align: left;
+        }
+
+        th {
+            background: var(--bg-tertiary);
+            font-weight: 600;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-secondary);
+        }
+
+        tr {
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        tbody tr:hover {
+            background: var(--bg-tertiary);
+        }
+
+        /* BUTTONS */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.625rem 1.25rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: 0.2s;
+            border: none;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .btn-success {
+            background: var(--color-success);
+            color: white;
+        }
+
+        .btn-danger {
+            background: var(--color-danger);
+            color: white;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+        }
+
+        .btn-sm {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.8rem;
+        }
+
+        /* BADGES */
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .badge-success { background: rgba(40, 167, 69, 0.1); color: var(--color-success); }
+        .badge-danger { background: rgba(220, 53, 69, 0.1); color: var(--color-danger); }
+        .badge-warning { background: rgba(255, 193, 7, 0.1); color: var(--color-warning); }
+        .badge-info { background: rgba(23, 162, 184, 0.1); color: var(--color-info); }
+
+        /* FORMS */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            font-family: inherit;
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        /* MODAL */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-secondary);
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+        }
+
+        .modal-footer {
+            padding: 1.5rem;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+        }
+
+        /* TABS */
+        .tabs {
+            display: flex;
+            gap: 1rem;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 2rem;
+        }
+
+        .tab {
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            color: var(--text-secondary);
+            font-weight: 600;
+            border-bottom: 3px solid transparent;
+            transition: 0.2s;
+        }
+
+        .tab.active {
+            color: var(--color-primary);
+            border-bottom-color: var(--color-primary);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* UTILITIES */
+        .hidden { display: none !important; }
+        .flex { display: flex; }
+        .items-center { align-items: center; }
+        .justify-between { justify-content: space-between; }
+        .gap-1 { gap: 0.5rem; }
+        .gap-2 { gap: 1rem; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .admin-layout {
+                grid-template-columns: 1fr;
+                grid-template-areas: 
+                    "header"
+                    "main";
+            }
+            .sidebar {
+                display: none;
+            }
+            .main-content {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="admin-layout">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <h1>
+                    <span>???</span>
+                    ARKANA ADMIN
+                </h1>
+            </div>
+
+            <nav>
+                <ul class="sidebar-nav">
+                    <li class="sidebar-nav-item">
+                        <a class="sidebar-nav-link active" onclick="showPage('dashboard')">
+                            <i class="iconoir-dashboard-dots"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-nav-item">
+                        <a class="sidebar-nav-link" onclick="showPage('products')">
+                            <i class="iconoir-box"></i>
+                            <span>Produtos</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-nav-item">
+                        <a class="sidebar-nav-link" onclick="showPage('orders')">
+                            <i class="iconoir-cart"></i>
+                            <span>Pedidos</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-nav-item">
+                        <a class="sidebar-nav-link" onclick="showPage('customers')">
+                            <i class="iconoir-group"></i>
+                            <span>Clientes</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-nav-item">
+                        <a class="sidebar-nav-link" onclick="showPage('emails')">
+                            <i class="iconoir-mail"></i>
+                            <span>Email Marketing</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-nav-item">
+                        <a class="sidebar-nav-link" onclick="showPage('analytics')">
+                            <i class="iconoir-graph-up"></i>
+                            <span>Análises</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-nav-item">
+                        <a class="sidebar-nav-link" onclick="showPage('settings')">
+                            <i class="iconoir-settings"></i>
+                            <span>Configurações</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- HEADER -->
+        <header class="header">
+            <div class="header-search">
+                <input type="text" class="search-input" placeholder="Buscar produtos, pedidos, clientes...">
+            </div>
+
+            <div class="header-actions">
+                <button class="theme-toggle" onclick="toggleTheme()">
+                    <i class="iconoir-sun-light" id="theme-icon"></i>
+                    <span id="theme-text">Claro</span>
+                </button>
+
+                <button class="btn btn-outline btn-sm">
+                    <i class="iconoir-bell"></i>
+                    Notificações
+                    <span class="badge badge-danger" style="margin-left: 0.5rem;">3</span>
+                </button>
+
+                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                    <img src="https://via.placeholder.com/40/1a237e/ffd700?text=MQ" 
+                         alt="Marcelo" 
+                         style="width: 40px; height: 40px; border-radius: 50%;">
+                    <div>
+                        <div style="font-weight: 600; font-size: 0.9rem;">Marcelo Quintino</div>
+                        <div style="font-size: 0.75rem; color: var(--text-secondary);">Administrador</div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <!-- DASHBOARD -->
+            <div id="page-dashboard" class="page-content">
+                <div class="page-header">
+                    <h1 class="page-title">
+                        <i class="iconoir-dashboard-dots"></i>
+                        Dashboard
+                    </h1>
+                    <p class="page-subtitle">Visão geral da Arkana Store</p>
+                </div>
+
+                <!-- STATS -->
+                <div class="cards-grid">
+                    <div class="stat-card">
+                        <div class="stat-card-header">
+                            <div>
+                                <div class="stat-card-title">Vendas Hoje</div>
+                                <div class="stat-card-value">R$ 1.247</div>
+                                <div class="stat-card-change positive">
+                                    <i class="iconoir-arrow-up"></i> +12.5%
+                                </div>
+                            </div>
+                            <div class="stat-card-icon success">
+                                <i class="iconoir-dollar"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-card-header">
+                            <div>
+                                <div class="stat-card-title">Pedidos</div>
+                                <div class="stat-card-value">23</div>
+                                <div class="stat-card-change positive">
+                                    <i class="iconoir-arrow-up"></i> +8.3%
+                                </div>
+                            </div>
+                            <div class="stat-card-icon primary">
+                                <i class="iconoir-cart"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-card-header">
+                            <div>
+                                <div class="stat-card-title">Clientes</div>
+                                <div class="stat-card-value">156</div>
+                                <div class="stat-card-change positive">
+                                    <i class="iconoir-arrow-up"></i> +5.2%
+                                </div>
+                            </div>
+                            <div class="stat-card-icon warning">
+                                <i class="iconoir-group"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-card-header">
+                            <div>
+                                <div class="stat-card-title">Taxa Conversão</div>
+                                <div class="stat-card-value">4.2%</div>
+                                <div class="stat-card-change negative">
+                                    <i class="iconoir-arrow-down"></i> -1.1%
+                                </div>
+                            </div>
+                            <div class="stat-card-icon danger">
+                                <i class="iconoir-graph-up"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RECENT ORDERS -->
+                <div class="table-container">
+                    <div class="table-header">
+                        <h3 class="table-title">Pedidos Recentes</h3>
+                        <button class="btn btn-primary btn-sm">
+                            <i class="iconoir-eye"></i>
+                            Ver Todos
+                        </button>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Cliente</th>
+                                <th>Produto</th>
+                                <th>Valor</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#ARK-001</td>
+                                <td>João Silva</td>
+                                <td>Camiseta Compasso</td>
+                                <td>R$ 89,90</td>
+                                <td><span class="badge badge-success">Pago</span></td>
+                                <td>
+                                    <button class="btn btn-outline btn-sm">
+                                        <i class="iconoir-eye"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#ARK-002</td>
+                                <td>Pedro Santos</td>
+                                <td>Anel Mestre</td>
+                                <td>R$ 149,90</td>
+                                <td><span class="badge badge-warning">Pendente</span></td>
+                                <td>
+                                    <button class="btn btn-outline btn-sm">
+                                        <i class="iconoir-eye"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#ARK-003</td>
+                                <td>Carlos Oliveira</td>
+                                <td>Bermuda Logos</td>
+                                <td>R$ 79,90</td>
+                                <td><span class="badge badge-info">Enviado</span></td>
+                                <td>
+                                    <button class="btn btn-outline btn-sm">
+                                        <i class="iconoir-eye"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- PRODUCTS PAGE -->
+            <div id="page-products" class="page-content hidden">
+                <div class="page-header">
+                    <h1 class="page-title">
+                        <i class="iconoir-box"></i>
+                        Produtos
+                    </h1>
+                    <p class="page-subtitle">Gerencie o catálogo de produtos maçônicos</p>
+                </div>
+
+                <div class="flex justify-between items-center mb-2">
+                    <div class="flex gap-2">
+                        <button class="btn btn-outline">
+                            <i class="iconoir-filter"></i>
+                            Filtros
+                        </button>
+                        <button class="btn btn-outline">
+                            <i class="iconoir-sort"></i>
+                            Ordenar
+                        </button>
+                    </div>
+                    <button class="btn btn-primary" onclick="openModal('modal-product')">
+                        <i class="iconoir-plus"></i>
+                        Novo Produto
+                    </button>
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Imagem</th>
+                                <th>Nome</th>
+                                <th>Categoria</th>
+                                <th>Preço</th>
+                                <th>Estoque</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="products-table-body">
+                            <tr>
+                                <td>
+                                    <img src="https://via.placeholder.com/60/1a237e/ffd700?text=?" 
+                                         style="width: 60px; height: 60px; border-radius: 8px;">
+                                </td>
+                                <td><strong>Camiseta Compasso e Esquadro</strong></td>
+                                <td>Camisetas</td>
+                                <td><strong>R$ 89,90</strong></td>
+                                <td>45 un</td>
+                                <td><span class="badge badge-success">Ativo</span></td>
+                                <td>
+                                    <div class="flex gap-1">
+                                        <button class="btn btn-outline btn-sm" onclick="editProduct(1)">
+                                            <i class="iconoir-edit"></i>
+                                        </button>
+                                        <button class="btn btn-danger btn-sm" onclick="deleteProduct(1)">
+                                            <i class="iconoir-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- Mais produtos aqui -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- EMAILS PAGE -->
+            <div id="page-emails" class="page-content hidden">
+                <div class="page-header">
+                    <h1 class="page-title">
+                        <i class="iconoir-mail"></i>
+                        Email Marketing
+                    </h1>
+                    <p class="page-subtitle">Campanhas e automações de email</p>
+                </div>
+
+                <div class="cards-grid">
+                    <div class="stat-card">
+                        <div class="stat-card-header">
+                            <div>
+                                <div class="stat-card-title">Emails Enviados</div>
+                                <div class="stat-card-value">1.234</div>
+                                <div class="stat-card-change positive">Este mês</div>
+                            </div>
+                            <div class="stat-card-icon primary">
+                                <i class="iconoir-send"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-card-header">
+                            <div>
+                                <div class="stat-card-title">Taxa de Abertura</div>
+                                <div class="stat-card-value">42%</div>
+                                <div class="stat-card-change positive">+5%</div>
+                            </div>
+                            <div class="stat-card-icon success">
+                                <i class="iconoir-eye"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-card-header">
+                            <div>
+                                <div class="stat-card-title">Taxa de Clique</div>
+                                <div class="stat-card-value">18%</div>
+                                <div class="stat-card-change positive">+2%</div>
+                            </div>
+                            <div class="stat-card-icon warning">
+                                <i class="iconoir-mouse-button-left"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-between items-center mb-2">
+                    <h3>Campanhas Ativas</h3>
+                    <button class="btn btn-primary" onclick="openModal('modal-email')">
+                        <i class="iconoir-plus"></i>
+                        Nova Campanha
+                    </button>
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Campanha</th>
+                                <th>Template</th>
+                                <th>Enviados</th>
+                                <th>Aberturas</th>
+                                <th>Cliques</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Black Friday 2025</strong></td>
+                                <td>promo_campaign.html</td>
+                                <td>450</td>
+                                <td>42%</td>
+                                <td>18%</td>
+                                <td><span class="badge badge-success">Ativa</span></td>
+                                <td>
+                                    <button class="btn btn-outline btn-sm">
+                                        <i class="iconoir-eye"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Boas-vindas Novos Clientes</strong></td>
+                                <td>followup.html</td>
+                                <td>89</td>
+                                <td>65%</td>
+                                <td>32%</td>
+                                <td><span class="badge badge-success">Ativa</span></td>
+                                <td>
+                                    <button class="btn btn-outline btn-sm">
+                                        <i class="iconoir-eye"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- SETTINGS PAGE -->
+            <div id="page-settings" class="page-content hidden">
+                <div class="page-header">
+                    <h1 class="page-title">
+                        <i class="iconoir-settings"></i>
+                        Configurações
+                    </h1>
+                    <p class="page-subtitle">Configure pagamentos, SMTP e integrações</p>
+                </div>
+
+                <div class="tabs">
+                    <div class="tab active" onclick="showTab('tab-payments')">
+                        <i class="iconoir-credit-card"></i>
+                        Pagamentos
+                    </div>
+                    <div class="tab" onclick="showTab('tab-smtp')">
+                        <i class="iconoir-send"></i>
+                        SMTP
+                    </div>
+                    <div class="tab" onclick="showTab('tab-integrations')">
+                        <i class="iconoir-plug"></i>
+                        Integrações
+                    </div>
+                </div>
+
+                <!-- TAB: PAYMENTS -->
+                <div id="tab-payments" class="tab-content active">
+                    <div class="table-container">
+                        <div class="table-header">
+                            <h3 class="table-title">Gateways de Pagamento</h3>
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Gateway</th>
+                                    <th>Status</th>
+                                    <th>Taxa</th>
+                                    <th>Webhook</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <strong>Mercado Pago</strong>
+                                        <div style="font-size: 0.8rem; color: var(--text-secondary);">
+                                            Gateway principal (Brasil)
+                                        </div>
+                                    </td>
+                                    <td><span class="badge badge-warning">Configurar</span></td>
+                                    <td>4.99%</td>
+                                    <td>
+                                        <code style="font-size: 0.75rem;">api.avila.inc/webhooks/mercadopago/arkana</code>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-primary btn-sm">
+                                            <i class="iconoir-settings"></i>
+                                            Configurar
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>PayPal</strong>
+                                        <div style="font-size: 0.8rem; color: var(--text-secondary);">
+                                            Gateway internacional
+                                        </div>
+                                    </td>
+                                    <td><span class="badge badge-success">Ativo</span></td>
+                                    <td>4.99%</td>
+                                    <td>
+                                        <code style="font-size: 0.75rem;">api.avila.inc/webhooks/paypal/arkana</code>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-outline btn-sm">
+                                            <i class="iconoir-eye"></i>
+                                            Detalhes
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>Stripe</strong>
+                                        <div style="font-size: 0.8rem; color: var(--text-secondary);">
+                                            Gateway reserva
+                                        </div>
+                                    </td>
+                                    <td><span class="badge badge-success">Ativo</span></td>
+                                    <td>3.99%</td>
+                                    <td>
+                                        <code style="font-size: 0.75rem;">api.avila.inc/webhooks/stripe/arkana</code>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-outline btn-sm">
+                                            <i class="iconoir-eye"></i>
+                                            Detalhes
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- TAB: SMTP -->
+                <div id="tab-smtp" class="tab-content">
+                    <div class="table-container">
+                        <div class="table-header">
+                            <h3 class="table-title">Configuração SMTP</h3>
+                            <button class="btn btn-success btn-sm" onclick="testSMTP()">
+                                <i class="iconoir-send"></i>
+                                Testar Envio
+                            </button>
+                        </div>
+                        <div style="padding: 1.5rem;">
+                            <div class="form-group">
+                                <label class="form-label">Host SMTP</label>
+                                <input type="text" class="form-input" value="smtp.porkbun.com" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Porta</label>
+                                <input type="text" class="form-input" value="587" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Email Remetente</label>
+                                <input type="email" class="form-input" value="dev@avila.inc" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Nome Remetente</label>
+                                <input type="text" class="form-input" value="Nicolas Ávila - Ávila Inc" readonly>
+                            </div>
+                            <div class="badge badge-success">
+                                <i class="iconoir-check"></i>
+                                Configurado e testado
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB: INTEGRATIONS -->
+                <div id="tab-integrations" class="tab-content">
+                    <div class="cards-grid">
+                        <div class="stat-card">
+                            <div class="stat-card-header">
+                                <div>
+                                    <div class="stat-card-title">Avila-Gravatar</div>
+                                    <div style="margin-top: 0.5rem;">
+                                        <span class="badge badge-success">Conectado</span>
+                                    </div>
+                                </div>
+                                <div class="stat-card-icon success">
+                                    <i class="iconoir-user"></i>
+                                </div>
+                            </div>
+                            <p style="margin-top: 1rem; font-size: 0.875rem; color: var(--text-secondary);">
+                                Avatares de clientes automáticos
+                            </p>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-card-header">
+                                <div>
+                                    <div class="stat-card-title">MongoDB Atlas</div>
+                                    <div style="margin-top: 0.5rem;">
+                                        <span class="badge badge-success">Conectado</span>
+                                    </div>
+                                </div>
+                                <div class="stat-card-icon primary">
+                                    <i class="iconoir-database"></i>
+                                </div>
+                            </div>
+                            <p style="margin-top: 1rem; font-size: 0.875rem; color: var(--text-secondary);">
+                                Banco de dados cloud
+                            </p>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-card-header">
+                                <div>
+                                    <div class="stat-card-title">Sentry</div>
+                                    <div style="margin-top: 0.5rem;">
+                                        <span class="badge badge-success">Monitorando</span>
+                                    </div>
+                                </div>
+                                <div class="stat-card-icon warning">
+                                    <i class="iconoir-bug"></i>
+                                </div>
+                            </div>
+                            <p style="margin-top: 1rem; font-size: 0.875rem; color: var(--text-secondary);">
+                                Monitoramento de erros
+                            </p>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-card-header">
+                                <div>
+                                    <div class="stat-card-title">Cloudflare</div>
+                                    <div style="margin-top: 0.5rem;">
+                                        <span class="badge badge-success">Ativo</span>
+                                    </div>
+                                </div>
+                                <div class="stat-card-icon info">
+                                    <i class="iconoir-cloud"></i>
+                                </div>
+                            </div>
+                            <p style="margin-top: 1rem; font-size: 0.875rem; color: var(--text-secondary);">
+                                CDN e proteção DDoS
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Other pages placeholder -->
+            <div id="page-orders" class="page-content hidden">
+                <h1 class="page-title"><i class="iconoir-cart"></i> Pedidos</h1>
+                <p>Em desenvolvimento...</p>
+            </div>
+
+            <div id="page-customers" class="page-content hidden">
+                <h1 class="page-title"><i class="iconoir-group"></i> Clientes</h1>
+                <p>Em desenvolvimento...</p>
+            </div>
+
+            <div id="page-analytics" class="page-content hidden">
+                <h1 class="page-title"><i class="iconoir-graph-up"></i> Análises</h1>
+                <p>Em desenvolvimento...</p>
+            </div>
+        </main>
+    </div>
+
+    <!-- MODAL: NOVO PRODUTO -->
+    <div id="modal-product" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">
+                    <i class="iconoir-plus"></i>
+                    Novo Produto Maçônico
+                </h3>
+                <button class="modal-close" onclick="closeModal('modal-product')">
+                    <i class="iconoir-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="form-product">
+                    <div class="form-group">
+                        <label class="form-label">
+                            <i class="iconoir-tag"></i>
+                            Nome do Produto
+                        </label>
+                        <input type="text" class="form-input" placeholder="Ex: Camiseta Compasso e Esquadro" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">
+                            <i class="iconoir-list"></i>
+                            Categoria
+                        </label>
+                        <select class="form-select" required>
+                            <option value="">Selecione...</option>
+                            <option value="camisetas">?? Camisetas</option>
+                            <option value="bermudas">?? Bermudas</option>
+                            <option value="acessorios">?? Acessórios</option>
+                            <option value="bones">?? Bonés</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">
+                            <i class="iconoir-align-left"></i>
+                            Descrição
+                        </label>
+                        <textarea class="form-textarea" placeholder="Descrição detalhada do produto..." required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">
+                            <i class="iconoir-dollar"></i>
+                            Preço (R$)
+                        </label>
+                        <input type="number" class="form-input" placeholder="89.90" step="0.01" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">
+                            <i class="iconoir-package"></i>
+                            Estoque Inicial
+                        </label>
+                        <input type="number" class="form-input" placeholder="50" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">
+                            <i class="iconoir-media-image"></i>
+                            URL da Imagem
+                        </label>
+                        <input type="url" class="form-input" placeholder="https://..." required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">
+                            <i class="iconoir-sparks"></i>
+                            Símbolos Maçônicos (opcional)
+                        </label>
+                        <input type="text" class="form-input" placeholder="Compasso, Esquadro, Olho">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeModal('modal-product')">Cancelar</button>
+                <button class="btn btn-primary" onclick="saveProduct()">
+                    <i class="iconoir-check"></i>
+                    Salvar Produto
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: NOVA CAMPANHA EMAIL -->
+    <div id="modal-email" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">
+                    <i class="iconoir-send"></i>
+                    Nova Campanha de Email
+                </h3>
+                <button class="modal-close" onclick="closeModal('modal-email')">
+                    <i class="iconoir-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="form-email">
+                    <div class="form-group">
+                        <label class="form-label">Nome da Campanha</label>
+                        <input type="text" class="form-input" placeholder="Ex: Black Friday 2025">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Template</label>
+                        <select class="form-select">
+                            <option>Promo Campaign (promo_campaign.html)</option>
+                            <option>Newsletter (newsletter.html)</option>
+                            <option>Follow-up (followup.html)</option>
+                            <option>Outreach (outreach.html)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Assunto</label>
+                        <input type="text" class="form-input" placeholder="??? Ofertas exclusivas Arkana Store">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Destinatários</label>
+                        <select class="form-select">
+                            <option>Todos os clientes (156)</option>
+                            <option>Clientes ativos (89)</option>
+                            <option>Novos clientes (23)</option>
+                            <option>Clientes inativos (44)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Agendar Envio</label>
+                        <input type="datetime-local" class="form-input">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeModal('modal-email')">Cancelar</button>
+                <button class="btn btn-primary" onclick="sendCampaign()">
+                    <i class="iconoir-send"></i>
+                    Enviar Campanha
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ===================================
+        // THEME TOGGLE
+        // ===================================
+        function toggleTheme() {
+            const html = document.documentElement;
+            const theme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', theme);
+            localStorage.setItem('admin-theme', theme);
+            updateThemeUI(theme);
+        }
+
+        function updateThemeUI(theme) {
+            const icon = document.getElementById('theme-icon');
+            const text = document.getElementById('theme-text');
+            if (theme === 'dark') {
+                icon.className = 'iconoir-sun-light';
+                text.textContent = 'Claro';
+            } else {
+                icon.className = 'iconoir-half-moon';
+                text.textContent = 'Escuro';
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const theme = localStorage.getItem('admin-theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', theme);
+            updateThemeUI(theme);
+        });
+
+        // ===================================
+        // PAGE NAVIGATION
+        // ===================================
+        function showPage(pageId) {
+            // Esconder todas as páginas
+            document.querySelectorAll('.page-content').forEach(p => p.classList.add('hidden'));
+            
+            // Mostrar página selecionada
+            document.getElementById(`page-${pageId}`).classList.remove('hidden');
+            
+            // Atualizar sidebar
+            document.querySelectorAll('.sidebar-nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            event.target.closest('.sidebar-nav-link').classList.add('active');
+        }
+
+        // ===================================
+        // TABS
+        // ===================================
+        function showTab(tabId) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+        }
+
+        // ===================================
+        // MODALS
+        // ===================================
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        // ===================================
+        // PRODUCTS
+        // ===================================
+        function saveProduct() {
+            alert('? Produto salvo com sucesso!\n\n(Integração com MongoDB será implementada)');
+            closeModal('modal-product');
+        }
+
+        function editProduct(id) {
+            alert(`Editar produto #${id}`);
+        }
+
+        function deleteProduct(id) {
+            if (confirm('Tem certeza que deseja excluir este produto?')) {
+                alert(`? Produto #${id} excluído!`);
+            }
+        }
+
+        // ===================================
+        // EMAIL CAMPAIGNS
+        // ===================================
+        function sendCampaign() {
+            if (confirm('Enviar campanha para os destinatários selecionados?')) {
+                alert('?? Campanha enviada com sucesso!\n\n? 156 emails na fila\n? Enviando via smtp.porkbun.com');
+                closeModal('modal-email');
+            }
+        }
+
+        function testSMTP() {
+            alert('?? Testando configuração SMTP...\n\n? Enviando email de teste para: marceloquintinoalves25@gmail.com\n\nVerifique sua caixa de entrada!');
+        }
+
+        // ===================================
+        // UTILITIES
+        // ===================================
+        console.log('??? Arkana Admin Panel - Powered by Ávila Inc');
+    </script>
+</body>
+</html>

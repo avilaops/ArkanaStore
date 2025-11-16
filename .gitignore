@@ -1,0 +1,97 @@
+# ===================================================================
+# ARKANA STORE - GITIGNORE
+# ===================================================================
+
+# Ambiente (Secrets)
+config/.env.arkana
+config/.env.arkana.production
+config/.env.arkana.local
+.env
+.env.*
+!.env.template
+!.env.*.template
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+pip-log.txt
+pip-delete-this-directory.txt
+
+# SQLite
+*.db
+*.sqlite
+*.sqlite3
+data/*.db
+
+# Rust
+target/
+Cargo.lock
+**/*.rs.bk
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.vs/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+logs/
+
+# Temporários
+*.tmp
+*.temp
+*.bak
+*.backup
+
+# Compilados
+*.wasm
+*.js.map
+
+# Secrets
+secrets/
+*.key
+*.pem
+*.crt
+
+# Zips
+*.zip
+
+# Recovery codes
+*Recovery_Codes*.txt
+
+# Commit message temporário
+commit-message.txt

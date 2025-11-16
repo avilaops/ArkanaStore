@@ -1,0 +1,58 @@
+[package]
+name = "arkana-backend"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+
+[[bin]]
+name = "arkana-api"
+path = "src/main.rs"
+
+[dependencies]
+# Workspace shared
+arkana-shared = { path = "../arkana-shared" }
+
+# Web framework
+actix-web.workspace = true
+actix-cors.workspace = true
+
+# Async
+tokio.workspace = true
+async-trait.workspace = true
+
+# Serialization
+serde.workspace = true
+serde_json.workspace = true
+
+# Database
+sqlx.workspace = true
+mongodb.workspace = true
+
+# Payment gateways
+stripe-rust.workspace = true
+reqwest.workspace = true
+
+# Auth & Security
+jsonwebtoken.workspace = true
+bcrypt.workspace = true
+uuid.workspace = true
+
+# Logging
+tracing.workspace = true
+tracing-subscriber.workspace = true
+sentry.workspace = true
+
+# Config
+dotenv.workspace = true
+config.workspace = true
+
+# Time
+chrono.workspace = true
+
+# Crypto for webhooks
+hmac = "0.12"
+sha2 = "0.10"
+hex = "0.4"
+
+# Env vars
+envy = "0.4"
