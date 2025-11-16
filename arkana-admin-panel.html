@@ -4,39 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>??? Arkana Admin - Painel de Controle</title>
+    <title>ARKANA Admin - Painel de Controle</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/iconoir-icons/iconoir@main/css/iconoir.css">
     
     <style>
+        /* ===================================================================
+           PALETA ARKANA REAL - Admin Panel
+           =================================================================== */
+        
         :root {
             --sidebar-width: 280px;
             --header-height: 70px;
             
-            /* Light mode */
-            --bg-primary: #f8f9fa;
-            --bg-secondary: #ffffff;
-            --bg-tertiary: #e9ecef;
-            --text-primary: #212529;
-            --text-secondary: #6c757d;
-            --border-color: #dee2e6;
+            /* Cores terrosas da loja */
+            --concrete: #d4cec5;
+            --warm-beige: #e8dfd3;
+            --wood-light: #c19a6b;
+            --wood-medium: #8b6f47;
+            --wood-dark: #5c4a3a;
+            --graphite: #2a2a2a;
+            --charcoal: #1a1a1a;
+            --warm-gray: #6b6357;
+            --accent-gold: #b8945f;
             
-            --color-primary: #1a237e;
-            --color-success: #28a745;
-            --color-danger: #dc3545;
-            --color-warning: #ffc107;
-            --color-info: #17a2b8;
+            /* Tema claro */
+            --bg-primary: #f5f2ed;
+            --bg-secondary: #ffffff;
+            --bg-tertiary: #e8dfd3;
+            --text-primary: #2a2a2a;
+            --text-secondary: #6b6357;
+            --border-color: #d4cec5;
+            
+            --color-primary: #8b6f47;
+            --color-success: #6b8e23;
+            --color-danger: #a0522d;
+            --color-warning: #b8945f;
+            --color-info: #708090;
         }
 
         [data-theme="dark"] {
-            --bg-primary: #1a1d29;
-            --bg-secondary: #242938;
-            --bg-tertiary: #2f3349;
-            --text-primary: #e4e6eb;
-            --text-secondary: #b0b3b8;
-            --border-color: #3e4152;
+            --bg-primary: #1a1a1a;
+            --bg-secondary: #2a2a2a;
+            --bg-tertiary: #3a3a3a;
+            --text-primary: #e8dfd3;
+            --text-secondary: #c19a6b;
+            --border-color: #3a3a3a;
         }
 
         * {
@@ -63,7 +78,10 @@
             min-height: 100vh;
         }
 
-        /* SIDEBAR */
+        /* ===================================================================
+           SIDEBAR - Estilo boutique
+           =================================================================== */
+        
         .sidebar {
             grid-area: sidebar;
             background: var(--bg-secondary);
@@ -75,21 +93,58 @@
             overflow-y: auto;
         }
 
+        /* Efeito madeira sutil */
+        .sidebar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                180deg,
+                transparent 0%,
+                rgba(139,111,71,0.02) 50%,
+                transparent 100%
+            );
+            background-size: 100% 100px;
+            pointer-events: none;
+        }
+
         .sidebar-logo {
             padding: 0 1.5rem;
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
+            position: relative;
+            z-index: 1;
         }
 
         .sidebar-logo h1 {
-            font-size: 1.5rem;
-            color: var(--text-primary);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 300;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--accent-gold);
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.75rem;
+        }
+
+        .sidebar-logo-icon {
+            width: 36px;
+            height: 36px;
+            border: 1px solid var(--accent-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
         }
 
         .sidebar-nav {
             list-style: none;
+            position: relative;
+            z-index: 1;
         }
 
         .sidebar-nav-item {
@@ -99,26 +154,40 @@
         .sidebar-nav-link {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
-            padding: 0.75rem 1.5rem;
+            gap: 1rem;
+            padding: 1rem 1.5rem;
             color: var(--text-secondary);
             text-decoration: none;
-            transition: all 0.2s;
+            transition: all 0.3s;
             cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            border-left: 3px solid transparent;
         }
 
-        .sidebar-nav-link:hover,
-        .sidebar-nav-link.active {
+        .sidebar-nav-link:hover {
             background: var(--bg-tertiary);
             color: var(--text-primary);
-            border-left: 3px solid var(--color-primary);
+            border-left-color: var(--accent-gold);
+        }
+
+        .sidebar-nav-link.active {
+            background: var(--bg-tertiary);
+            color: var(--accent-gold);
+            border-left-color: var(--accent-gold);
+            font-weight: 500;
         }
 
         .sidebar-nav-link i {
             font-size: 1.2rem;
+            opacity: 0.8;
         }
 
-        /* HEADER */
+        /* ===================================================================
+           HEADER
+           =================================================================== */
+        
         .header {
             grid-area: header;
             background: var(--bg-secondary);
@@ -139,12 +208,21 @@
 
         .search-input {
             width: 100%;
-            padding: 0.75rem 1rem 0.75rem 3rem;
+            padding: 0.75rem 1rem;
             border: 1px solid var(--border-color);
-            border-radius: 8px;
+            border-radius: 2px;
             background: var(--bg-tertiary);
             color: var(--text-primary);
             font-size: 0.9rem;
+            font-family: inherit;
+            letter-spacing: 0.02em;
+            transition: 0.3s;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 0 3px rgba(184,148,95,0.1);
         }
 
         .header-actions {
@@ -156,63 +234,105 @@
         .theme-toggle {
             background: var(--bg-tertiary);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 0.5rem 1rem;
+            border-radius: 2px;
+            padding: 0.75rem 1.25rem;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            transition: 0.2s;
+            gap: 0.75rem;
+            transition: 0.3s;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            color: var(--text-primary);
         }
 
         .theme-toggle:hover {
-            background: var(--bg-primary);
+            border-color: var(--accent-gold);
+            background: var(--bg-secondary);
         }
 
-        /* MAIN CONTENT */
+        /* ===================================================================
+           MAIN CONTENT
+           =================================================================== */
+        
         .main-content {
             grid-area: main;
-            padding: 2rem;
+            padding: 2.5rem;
             margin-left: var(--sidebar-width);
         }
 
         .page-header {
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
         }
 
         .page-title {
+            font-family: 'Montserrat', sans-serif;
             font-size: 2rem;
-            font-weight: 700;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
             margin-bottom: 0.5rem;
             display: flex;
             align-items: center;
-            gap: 0.75rem;
+            gap: 1rem;
         }
 
         .page-subtitle {
             color: var(--text-secondary);
-            font-size: 1rem;
+            font-size: 0.95rem;
+            font-weight: 300;
+            letter-spacing: 0.02em;
         }
 
-        /* CARDS */
+        /* ===================================================================
+           STAT CARDS
+           =================================================================== */
+        
         .cards-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 1.5rem;
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
         }
 
         .stat-card {
             background: var(--bg-secondary);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 1.5rem;
-            transition: 0.2s;
+            border-radius: 0;
+            padding: 2rem;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Textura sutil */
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent 0%,
+                rgba(139,111,71,0.02) 50%,
+                transparent 100%
+            );
+            background-size: 50px 50px;
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        .stat-card:hover::before {
+            opacity: 1;
         }
 
         .stat-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 20px var(--border-color);
+            border-color: var(--accent-gold);
         }
 
         .stat-card-header {
@@ -223,62 +343,74 @@
         }
 
         .stat-card-title {
-            font-size: 0.875rem;
-            color: var(--text-secondary);
+            font-size: 0.75rem;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
         }
 
         .stat-card-icon {
             width: 48px;
             height: 48px;
-            border-radius: 12px;
+            border: 1px solid var(--border-color);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.5rem;
+            background: var(--bg-tertiary);
         }
 
-        .stat-card-icon.primary { background: rgba(26, 35, 126, 0.1); color: var(--color-primary); }
-        .stat-card-icon.success { background: rgba(40, 167, 69, 0.1); color: var(--color-success); }
-        .stat-card-icon.danger { background: rgba(220, 53, 69, 0.1); color: var(--color-danger); }
-        .stat-card-icon.warning { background: rgba(255, 193, 7, 0.1); color: var(--color-warning); }
+        .stat-card-icon.primary { border-color: var(--wood-medium); color: var(--wood-medium); }
+        .stat-card-icon.success { border-color: #6b8e23; color: #6b8e23; }
+        .stat-card-icon.danger { border-color: #a0522d; color: #a0522d; }
+        .stat-card-icon.warning { border-color: var(--accent-gold); color: var(--accent-gold); }
 
         .stat-card-value {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 0.25rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.02em;
         }
 
         .stat-card-change {
-            font-size: 0.875rem;
-            font-weight: 600;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
         }
 
-        .stat-card-change.positive { color: var(--color-success); }
-        .stat-card-change.negative { color: var(--color-danger); }
+        .stat-card-change.positive { color: #6b8e23; }
+        .stat-card-change.negative { color: #a0522d; }
 
-        /* TABLE */
+        /* ===================================================================
+           TABLES
+           =================================================================== */
+        
         .table-container {
             background: var(--bg-secondary);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
+            border-radius: 0;
             overflow: hidden;
             margin-bottom: 2rem;
         }
 
         .table-header {
-            padding: 1.5rem;
+            padding: 2rem;
             border-bottom: 1px solid var(--border-color);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            background: var(--bg-tertiary);
         }
 
         .table-title {
-            font-size: 1.25rem;
-            font-weight: 600;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
         }
 
         table {
@@ -287,16 +419,17 @@
         }
 
         th, td {
-            padding: 1rem 1.5rem;
+            padding: 1.25rem 1.5rem;
             text-align: left;
         }
 
         th {
             background: var(--bg-tertiary);
-            font-weight: 600;
-            font-size: 0.875rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            font-size: 0.75rem;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.1em;
             color: var(--text-secondary);
         }
 
@@ -308,90 +441,151 @@
             background: var(--bg-tertiary);
         }
 
-        /* BUTTONS */
+        tbody td {
+            font-size: 0.9rem;
+        }
+
+        /* ===================================================================
+           BUTTONS
+           =================================================================== */
+        
         .btn {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            padding: 0.625rem 1.25rem;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 0.875rem;
+            gap: 0.75rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 2px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
             cursor: pointer;
-            transition: 0.2s;
-            border: none;
+            transition: all 0.3s;
+            border: 1px solid;
             text-decoration: none;
         }
 
         .btn-primary {
-            background: var(--color-primary);
-            color: white;
+            background: var(--accent-gold);
+            border-color: var(--accent-gold);
+            color: var(--charcoal);
         }
 
         .btn-primary:hover {
-            opacity: 0.9;
+            background: var(--wood-medium);
+            border-color: var(--wood-medium);
             transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(184,148,95,0.3);
         }
 
         .btn-success {
-            background: var(--color-success);
+            background: #6b8e23;
+            border-color: #6b8e23;
             color: white;
         }
 
         .btn-danger {
-            background: var(--color-danger);
+            background: #a0522d;
+            border-color: #a0522d;
             color: white;
         }
 
         .btn-outline {
             background: transparent;
-            border: 1px solid var(--border-color);
+            border-color: var(--border-color);
             color: var(--text-primary);
         }
 
-        .btn-sm {
-            padding: 0.4rem 0.8rem;
-            font-size: 0.8rem;
+        .btn-outline:hover {
+            border-color: var(--accent-gold);
+            background: var(--bg-tertiary);
         }
 
-        /* BADGES */
+        .btn-sm {
+            padding: 0.5rem 1rem;
+            font-size: 0.7rem;
+        }
+
+        /* ===================================================================
+           BADGES
+           =================================================================== */
+        
         .badge {
             display: inline-block;
-            padding: 0.25rem 0.75rem;
-            border-radius: 6px;
-            font-size: 0.75rem;
+            padding: 0.35rem 0.85rem;
+            border-radius: 2px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
             font-weight: 600;
+            letter-spacing: 0.1em;
             text-transform: uppercase;
+            border: 1px solid;
         }
 
-        .badge-success { background: rgba(40, 167, 69, 0.1); color: var(--color-success); }
-        .badge-danger { background: rgba(220, 53, 69, 0.1); color: var(--color-danger); }
-        .badge-warning { background: rgba(255, 193, 7, 0.1); color: var(--color-warning); }
-        .badge-info { background: rgba(23, 162, 184, 0.1); color: var(--color-info); }
+        .badge-success { 
+            background: rgba(107,142,35,0.1); 
+            color: #6b8e23;
+            border-color: #6b8e23;
+        }
+        
+        .badge-danger { 
+            background: rgba(160,82,45,0.1); 
+            color: #a0522d;
+            border-color: #a0522d;
+        }
+        
+        .badge-warning { 
+            background: rgba(184,148,95,0.1); 
+            color: var(--accent-gold);
+            border-color: var(--accent-gold);
+        }
+        
+        .badge-info { 
+            background: rgba(112,128,144,0.1); 
+            color: #708090;
+            border-color: #708090;
+        }
 
-        /* FORMS */
+        /* ===================================================================
+           FORMS
+           =================================================================== */
+        
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.75rem;
         }
 
         .form-label {
             display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            font-size: 0.875rem;
+            margin-bottom: 0.75rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-primary);
         }
 
         .form-input,
         .form-select,
         .form-textarea {
             width: 100%;
-            padding: 0.75rem;
+            padding: 1rem;
             border: 1px solid var(--border-color);
-            border-radius: 8px;
+            border-radius: 2px;
             background: var(--bg-tertiary);
             color: var(--text-primary);
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             font-family: inherit;
+            transition: 0.3s;
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 0 3px rgba(184,148,95,0.1);
         }
 
         .form-textarea {
@@ -399,7 +593,10 @@
             resize: vertical;
         }
 
-        /* MODAL */
+        /* ===================================================================
+           MODAL
+           =================================================================== */
+        
         .modal {
             display: none;
             position: fixed;
@@ -407,7 +604,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.7);
+            background: rgba(26,26,26,0.95);
             z-index: 1000;
             align-items: center;
             justify-content: center;
@@ -419,7 +616,8 @@
 
         .modal-content {
             background: var(--bg-secondary);
-            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 0;
             max-width: 600px;
             width: 90%;
             max-height: 90vh;
@@ -427,58 +625,89 @@
         }
 
         .modal-header {
-            padding: 1.5rem;
+            padding: 2rem;
             border-bottom: 1px solid var(--border-color);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            background: var(--bg-tertiary);
         }
 
         .modal-title {
-            font-size: 1.25rem;
-            font-weight: 600;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
         }
 
         .modal-close {
             background: none;
             border: none;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             cursor: pointer;
             color: var(--text-secondary);
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+        }
+
+        .modal-close:hover {
+            color: var(--text-primary);
+            transform: rotate(90deg);
         }
 
         .modal-body {
-            padding: 1.5rem;
+            padding: 2rem;
         }
 
         .modal-footer {
-            padding: 1.5rem;
+            padding: 2rem;
             border-top: 1px solid var(--border-color);
             display: flex;
             justify-content: flex-end;
             gap: 1rem;
         }
 
-        /* TABS */
+        /* ===================================================================
+           TABS
+           =================================================================== */
+        
         .tabs {
             display: flex;
-            gap: 1rem;
-            border-bottom: 2px solid var(--border-color);
+            gap: 0;
+            border-bottom: 1px solid var(--border-color);
             margin-bottom: 2rem;
         }
 
         .tab {
-            padding: 1rem 1.5rem;
+            padding: 1.25rem 2rem;
             cursor: pointer;
             color: var(--text-secondary);
-            font-weight: 600;
-            border-bottom: 3px solid transparent;
-            transition: 0.2s;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tab:hover {
+            color: var(--text-primary);
+            background: var(--bg-tertiary);
         }
 
         .tab.active {
-            color: var(--color-primary);
-            border-bottom-color: var(--color-primary);
+            color: var(--accent-gold);
+            border-bottom-color: var(--accent-gold);
+            background: var(--bg-tertiary);
         }
 
         .tab-content {
@@ -523,8 +752,8 @@
         <aside class="sidebar">
             <div class="sidebar-logo">
                 <h1>
-                    <span>???</span>
-                    ARKANA ADMIN
+                    <div class="sidebar-logo-icon">A</div>
+                    ARKANA
                 </h1>
             </div>
 
@@ -579,25 +808,24 @@
         <!-- HEADER -->
         <header class="header">
             <div class="header-search">
-                <input type="text" class="search-input" placeholder="Buscar produtos, pedidos, clientes...">
+                <input type="text" class="search-input" placeholder="Buscar...">
             </div>
 
             <div class="header-actions">
                 <button class="theme-toggle" onclick="toggleTheme()">
-                    <i class="iconoir-sun-light" id="theme-icon"></i>
+                    <span id="theme-icon">?</span>
                     <span id="theme-text">Claro</span>
                 </button>
 
                 <button class="btn btn-outline btn-sm">
                     <i class="iconoir-bell"></i>
-                    Notificações
                     <span class="badge badge-danger" style="margin-left: 0.5rem;">3</span>
                 </button>
 
                 <div style="display: flex; align-items: center; gap: 0.75rem;">
-                    <img src="https://via.placeholder.com/40/1a237e/ffd700?text=MQ" 
-                         alt="Marcelo" 
-                         style="width: 40px; height: 40px; border-radius: 50%;">
+                    <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--accent-gold); display: flex; align-items: center; justify-content: center; color: var(--charcoal); font-weight: 600;">
+                        MQ
+                    </div>
                     <div>
                         <div style="font-weight: 600; font-size: 0.9rem;">Marcelo Quintino</div>
                         <div style="font-size: 0.75rem; color: var(--text-secondary);">Administrador</div>
@@ -615,18 +843,18 @@
                         <i class="iconoir-dashboard-dots"></i>
                         Dashboard
                     </h1>
-                    <p class="page-subtitle">Visão geral da Arkana Store</p>
+                    <p class="page-subtitle">Visão geral da boutique Arkana</p>
                 </div>
 
                 <!-- STATS -->
                 <div class="cards-grid">
                     <div class="stat-card">
                         <div class="stat-card-header">
-                            <div>
+                            <div style="flex: 1;">
                                 <div class="stat-card-title">Vendas Hoje</div>
                                 <div class="stat-card-value">R$ 1.247</div>
                                 <div class="stat-card-change positive">
-                                    <i class="iconoir-arrow-up"></i> +12.5%
+                                    ? +12.5%
                                 </div>
                             </div>
                             <div class="stat-card-icon success">
@@ -637,11 +865,11 @@
 
                     <div class="stat-card">
                         <div class="stat-card-header">
-                            <div>
+                            <div style="flex: 1;">
                                 <div class="stat-card-title">Pedidos</div>
                                 <div class="stat-card-value">23</div>
                                 <div class="stat-card-change positive">
-                                    <i class="iconoir-arrow-up"></i> +8.3%
+                                    ? +8.3%
                                 </div>
                             </div>
                             <div class="stat-card-icon primary">
@@ -652,11 +880,11 @@
 
                     <div class="stat-card">
                         <div class="stat-card-header">
-                            <div>
+                            <div style="flex: 1;">
                                 <div class="stat-card-title">Clientes</div>
                                 <div class="stat-card-value">156</div>
                                 <div class="stat-card-change positive">
-                                    <i class="iconoir-arrow-up"></i> +5.2%
+                                    ? +5.2%
                                 </div>
                             </div>
                             <div class="stat-card-icon warning">
@@ -667,11 +895,11 @@
 
                     <div class="stat-card">
                         <div class="stat-card-header">
-                            <div>
+                            <div style="flex: 1;">
                                 <div class="stat-card-title">Taxa Conversão</div>
                                 <div class="stat-card-value">4.2%</div>
                                 <div class="stat-card-change negative">
-                                    <i class="iconoir-arrow-down"></i> -1.1%
+                                    ? -1.1%
                                 </div>
                             </div>
                             <div class="stat-card-icon danger">
@@ -686,7 +914,6 @@
                     <div class="table-header">
                         <h3 class="table-title">Pedidos Recentes</h3>
                         <button class="btn btn-primary btn-sm">
-                            <i class="iconoir-eye"></i>
                             Ver Todos
                         </button>
                     </div>
@@ -703,10 +930,10 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>#ARK-001</td>
+                                <td><code>#ARK-001</code></td>
                                 <td>João Silva</td>
-                                <td>Camiseta Compasso</td>
-                                <td>R$ 89,90</td>
+                                <td>Camiseta Essential</td>
+                                <td><strong>R$ 89,90</strong></td>
                                 <td><span class="badge badge-success">Pago</span></td>
                                 <td>
                                     <button class="btn btn-outline btn-sm">
@@ -715,10 +942,10 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>#ARK-002</td>
+                                <td><code>#ARK-002</code></td>
                                 <td>Pedro Santos</td>
-                                <td>Anel Mestre</td>
-                                <td>R$ 149,90</td>
+                                <td>Anel Signature</td>
+                                <td><strong>R$ 179,90</strong></td>
                                 <td><span class="badge badge-warning">Pendente</span></td>
                                 <td>
                                     <button class="btn btn-outline btn-sm">
@@ -727,10 +954,10 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>#ARK-003</td>
+                                <td><code>#ARK-003</code></td>
                                 <td>Carlos Oliveira</td>
-                                <td>Bermuda Logos</td>
-                                <td>R$ 79,90</td>
+                                <td>Bermuda Urban</td>
+                                <td><strong>R$ 129,90</strong></td>
                                 <td><span class="badge badge-info">Enviado</span></td>
                                 <td>
                                     <button class="btn btn-outline btn-sm">
@@ -750,7 +977,7 @@
                         <i class="iconoir-box"></i>
                         Produtos
                     </h1>
-                    <p class="page-subtitle">Gerencie o catálogo de produtos maçônicos</p>
+                    <p class="page-subtitle">Gerencie o catálogo da boutique</p>
                 </div>
 
                 <div class="flex justify-between items-center mb-2">
@@ -786,10 +1013,10 @@
                         <tbody id="products-table-body">
                             <tr>
                                 <td>
-                                    <img src="https://via.placeholder.com/60/1a237e/ffd700?text=?" 
-                                         style="width: 60px; height: 60px; border-radius: 8px;">
+                                    <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=100" 
+                                         style="width: 60px; height: 60px; object-fit: cover;">
                                 </td>
-                                <td><strong>Camiseta Compasso e Esquadro</strong></td>
+                                <td><strong>Camiseta Essential</strong></td>
                                 <td>Camisetas</td>
                                 <td><strong>R$ 89,90</strong></td>
                                 <td>45 un</td>
@@ -805,7 +1032,6 @@
                                     </div>
                                 </td>
                             </tr>
-                            <!-- Mais produtos aqui -->
                         </tbody>
                     </table>
                 </div>
@@ -818,13 +1044,13 @@
                         <i class="iconoir-mail"></i>
                         Email Marketing
                     </h1>
-                    <p class="page-subtitle">Campanhas e automações de email</p>
+                    <p class="page-subtitle">Campanhas e automações</p>
                 </div>
 
                 <div class="cards-grid">
                     <div class="stat-card">
                         <div class="stat-card-header">
-                            <div>
+                            <div style="flex: 1;">
                                 <div class="stat-card-title">Emails Enviados</div>
                                 <div class="stat-card-value">1.234</div>
                                 <div class="stat-card-change positive">Este mês</div>
@@ -837,8 +1063,8 @@
 
                     <div class="stat-card">
                         <div class="stat-card-header">
-                            <div>
-                                <div class="stat-card-title">Taxa de Abertura</div>
+                            <div style="flex: 1;">
+                                <div class="stat-card-title">Taxa Abertura</div>
                                 <div class="stat-card-value">42%</div>
                                 <div class="stat-card-change positive">+5%</div>
                             </div>
@@ -850,8 +1076,8 @@
 
                     <div class="stat-card">
                         <div class="stat-card-header">
-                            <div>
-                                <div class="stat-card-title">Taxa de Clique</div>
+                            <div style="flex: 1;">
+                                <div class="stat-card-title">Taxa Cliques</div>
                                 <div class="stat-card-value">18%</div>
                                 <div class="stat-card-change positive">+2%</div>
                             </div>
@@ -863,7 +1089,7 @@
                 </div>
 
                 <div class="flex justify-between items-center mb-2">
-                    <h3>Campanhas Ativas</h3>
+                    <h3 style="font-family: 'Montserrat', sans-serif; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase;">Campanhas Ativas</h3>
                     <button class="btn btn-primary" onclick="openModal('modal-email')">
                         <i class="iconoir-plus"></i>
                         Nova Campanha
@@ -886,7 +1112,7 @@
                         <tbody>
                             <tr>
                                 <td><strong>Black Friday 2025</strong></td>
-                                <td>promo_campaign.html</td>
+                                <td><code>promo_campaign.html</code></td>
                                 <td>450</td>
                                 <td>42%</td>
                                 <td>18%</td>
@@ -898,8 +1124,8 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><strong>Boas-vindas Novos Clientes</strong></td>
-                                <td>followup.html</td>
+                                <td><strong>Boas-vindas</strong></td>
+                                <td><code>followup.html</code></td>
                                 <td>89</td>
                                 <td>65%</td>
                                 <td>32%</td>
@@ -922,7 +1148,7 @@
                         <i class="iconoir-settings"></i>
                         Configurações
                     </h1>
-                    <p class="page-subtitle">Configure pagamentos, SMTP e integrações</p>
+                    <p class="page-subtitle">Pagamentos, SMTP e integrações</p>
                 </div>
 
                 <div class="tabs">
@@ -961,17 +1187,16 @@
                                     <td>
                                         <strong>Mercado Pago</strong>
                                         <div style="font-size: 0.8rem; color: var(--text-secondary);">
-                                            Gateway principal (Brasil)
+                                            Gateway principal
                                         </div>
                                     </td>
                                     <td><span class="badge badge-warning">Configurar</span></td>
                                     <td>4.99%</td>
                                     <td>
-                                        <code style="font-size: 0.75rem;">api.avila.inc/webhooks/mercadopago/arkana</code>
+                                        <code style="font-size: 0.75rem;">api.avila.inc/webhooks/mercadopago</code>
                                     </td>
                                     <td>
                                         <button class="btn btn-primary btn-sm">
-                                            <i class="iconoir-settings"></i>
                                             Configurar
                                         </button>
                                     </td>
@@ -986,11 +1211,10 @@
                                     <td><span class="badge badge-success">Ativo</span></td>
                                     <td>4.99%</td>
                                     <td>
-                                        <code style="font-size: 0.75rem;">api.avila.inc/webhooks/paypal/arkana</code>
+                                        <code style="font-size: 0.75rem;">api.avila.inc/webhooks/paypal</code>
                                     </td>
                                     <td>
                                         <button class="btn btn-outline btn-sm">
-                                            <i class="iconoir-eye"></i>
                                             Detalhes
                                         </button>
                                     </td>
@@ -1005,11 +1229,10 @@
                                     <td><span class="badge badge-success">Ativo</span></td>
                                     <td>3.99%</td>
                                     <td>
-                                        <code style="font-size: 0.75rem;">api.avila.inc/webhooks/stripe/arkana</code>
+                                        <code style="font-size: 0.75rem;">api.avila.inc/webhooks/stripe</code>
                                     </td>
                                     <td>
                                         <button class="btn btn-outline btn-sm">
-                                            <i class="iconoir-eye"></i>
                                             Detalhes
                                         </button>
                                     </td>
@@ -1026,10 +1249,10 @@
                             <h3 class="table-title">Configuração SMTP</h3>
                             <button class="btn btn-success btn-sm" onclick="testSMTP()">
                                 <i class="iconoir-send"></i>
-                                Testar Envio
+                                Testar
                             </button>
                         </div>
-                        <div style="padding: 1.5rem;">
+                        <div style="padding: 2rem;">
                             <div class="form-group">
                                 <label class="form-label">Host SMTP</label>
                                 <input type="text" class="form-input" value="smtp.porkbun.com" readonly>
@@ -1039,16 +1262,11 @@
                                 <input type="text" class="form-input" value="587" readonly>
                             </div>
                             <div class="form-group">
-                                <label class="form-label">Email Remetente</label>
+                                <label class="form-label">Email</label>
                                 <input type="email" class="form-input" value="dev@avila.inc" readonly>
                             </div>
-                            <div class="form-group">
-                                <label class="form-label">Nome Remetente</label>
-                                <input type="text" class="form-input" value="Nicolas Ávila - Ávila Inc" readonly>
-                            </div>
                             <div class="badge badge-success">
-                                <i class="iconoir-check"></i>
-                                Configurado e testado
+                                ? Configurado e testado
                             </div>
                         </div>
                     </div>
@@ -1059,8 +1277,8 @@
                     <div class="cards-grid">
                         <div class="stat-card">
                             <div class="stat-card-header">
-                                <div>
-                                    <div class="stat-card-title">Avila-Gravatar</div>
+                                <div style="flex: 1;">
+                                    <div class="stat-card-title">Gravatar</div>
                                     <div style="margin-top: 0.5rem;">
                                         <span class="badge badge-success">Conectado</span>
                                     </div>
@@ -1069,79 +1287,62 @@
                                     <i class="iconoir-user"></i>
                                 </div>
                             </div>
-                            <p style="margin-top: 1rem; font-size: 0.875rem; color: var(--text-secondary);">
-                                Avatares de clientes automáticos
+                            <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-secondary);">
+                                Avatares automáticos
                             </p>
                         </div>
 
                         <div class="stat-card">
                             <div class="stat-card-header">
-                                <div>
-                                    <div class="stat-card-title">MongoDB Atlas</div>
+                                <div style="flex: 1;">
+                                    <div class="stat-card-title">SQLite</div>
                                     <div style="margin-top: 0.5rem;">
-                                        <span class="badge badge-success">Conectado</span>
+                                        <span class="badge badge-success">Ativo</span>
                                     </div>
                                 </div>
                                 <div class="stat-card-icon primary">
                                     <i class="iconoir-database"></i>
                                 </div>
                             </div>
-                            <p style="margin-top: 1rem; font-size: 0.875rem; color: var(--text-secondary);">
-                                Banco de dados cloud
+                            <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-secondary);">
+                                Banco local
                             </p>
                         </div>
 
                         <div class="stat-card">
                             <div class="stat-card-header">
-                                <div>
-                                    <div class="stat-card-title">Sentry</div>
-                                    <div style="margin-top: 0.5rem;">
-                                        <span class="badge badge-success">Monitorando</span>
-                                    </div>
-                                </div>
-                                <div class="stat-card-icon warning">
-                                    <i class="iconoir-bug"></i>
-                                </div>
-                            </div>
-                            <p style="margin-top: 1rem; font-size: 0.875rem; color: var(--text-secondary);">
-                                Monitoramento de erros
-                            </p>
-                        </div>
-
-                        <div class="stat-card">
-                            <div class="stat-card-header">
-                                <div>
+                                <div style="flex: 1;">
                                     <div class="stat-card-title">Cloudflare</div>
                                     <div style="margin-top: 0.5rem;">
                                         <span class="badge badge-success">Ativo</span>
                                     </div>
                                 </div>
-                                <div class="stat-card-icon info">
+                                <div class="stat-card-icon warning">
                                     <i class="iconoir-cloud"></i>
                                 </div>
                             </div>
-                            <p style="margin-top: 1rem; font-size: 0.875rem; color: var(--text-secondary);">
-                                CDN e proteção DDoS
+                            <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-secondary);">
+                                CDN + DDoS
                             </p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Other pages placeholder -->
+            <!-- Other pages -->
             <div id="page-orders" class="page-content hidden">
                 <h1 class="page-title"><i class="iconoir-cart"></i> Pedidos</h1>
-                <p>Em desenvolvimento...</p>
+                <p style="color: var(--text-secondary);">Em desenvolvimento...</p>
             </div>
 
             <div id="page-customers" class="page-content hidden">
                 <h1 class="page-title"><i class="iconoir-group"></i> Clientes</h1>
-                <p>Em desenvolvimento...</p>
+                <p style="color: var(--text-secondary);">Em desenvolvimento...</p>
             </div>
 
             <div id="page-analytics" class="page-content hidden">
                 <h1 class="page-title"><i class="iconoir-graph-up"></i> Análises</h1>
-                <p>Em desenvolvimento...</p>
+                <p style="color: var(--text-secondary);">Em desenvolvimento...</p>
             </div>
         </main>
     </div>
@@ -1152,252 +1353,64 @@
             <div class="modal-header">
                 <h3 class="modal-title">
                     <i class="iconoir-plus"></i>
-                    Novo Produto Maçônico
+                    Novo Produto
                 </h3>
-                <button class="modal-close" onclick="closeModal('modal-product')">
-                    <i class="iconoir-xmark"></i>
-                </button>
+                <button class="modal-close" onclick="closeModal('modal-product')">×</button>
             </div>
             <div class="modal-body">
                 <form id="form-product">
                     <div class="form-group">
-                        <label class="form-label">
-                            <i class="iconoir-tag"></i>
-                            Nome do Produto
-                        </label>
-                        <input type="text" class="form-input" placeholder="Ex: Camiseta Compasso e Esquadro" required>
+                        <label class="form-label">Nome do Produto</label>
+                        <input type="text" class="form-input" placeholder="Camiseta Essential" required>
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label">
-                            <i class="iconoir-list"></i>
-                            Categoria
-                        </label>
+                        <label class="form-label">Categoria</label>
                         <select class="form-select" required>
                             <option value="">Selecione...</option>
-                            <option value="camisetas">?? Camisetas</option>
-                            <option value="bermudas">?? Bermudas</option>
-                            <option value="acessorios">?? Acessórios</option>
-                            <option value="bones">?? Bonés</option>
+                            <option value="camisetas">Camisetas</option>
+                            <option value="bermudas">Bermudas</option>
+                            <option value="acessorios">Acessórios</option>
+                            <option value="bones">Bonés</option>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label">
-                            <i class="iconoir-align-left"></i>
-                            Descrição
-                        </label>
-                        <textarea class="form-textarea" placeholder="Descrição detalhada do produto..." required></textarea>
+                        <label class="form-label">Descrição</label>
+                        <textarea class="form-textarea" placeholder="Descrição detalhada..." required></textarea>
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label">
-                            <i class="iconoir-dollar"></i>
-                            Preço (R$)
-                        </label>
+                        <label class="form-label">Preço (R$)</label>
                         <input type="number" class="form-input" placeholder="89.90" step="0.01" required>
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label">
-                            <i class="iconoir-package"></i>
-                            Estoque Inicial
-                        </label>
+                        <label class="form-label">Estoque</label>
                         <input type="number" class="form-input" placeholder="50" required>
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label">
-                            <i class="iconoir-media-image"></i>
-                            URL da Imagem
-                        </label>
+                        <label class="form-label">URL Imagem</label>
                         <input type="url" class="form-input" placeholder="https://..." required>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">
-                            <i class="iconoir-sparks"></i>
-                            Símbolos Maçônicos (opcional)
-                        </label>
-                        <input type="text" class="form-input" placeholder="Compasso, Esquadro, Olho">
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button class="btn btn-outline" onclick="closeModal('modal-product')">Cancelar</button>
                 <button class="btn btn-primary" onclick="saveProduct()">
-                    <i class="iconoir-check"></i>
-                    Salvar Produto
+                    Salvar
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- MODAL: NOVA CAMPANHA EMAIL -->
+    <!-- MODAL: NOVA CAMPANHA -->
     <div id="modal-email" class="modal">
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="modal-title">
                     <i class="iconoir-send"></i>
-                    Nova Campanha de Email
+                    Nova Campanha
                 </h3>
-                <button class="modal-close" onclick="closeModal('modal-email')">
-                    <i class="iconoir-xmark"></i>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="form-email">
-                    <div class="form-group">
-                        <label class="form-label">Nome da Campanha</label>
-                        <input type="text" class="form-input" placeholder="Ex: Black Friday 2025">
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">Template</label>
-                        <select class="form-select">
-                            <option>Promo Campaign (promo_campaign.html)</option>
-                            <option>Newsletter (newsletter.html)</option>
-                            <option>Follow-up (followup.html)</option>
-                            <option>Outreach (outreach.html)</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">Assunto</label>
-                        <input type="text" class="form-input" placeholder="??? Ofertas exclusivas Arkana Store">
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">Destinatários</label>
-                        <select class="form-select">
-                            <option>Todos os clientes (156)</option>
-                            <option>Clientes ativos (89)</option>
-                            <option>Novos clientes (23)</option>
-                            <option>Clientes inativos (44)</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">Agendar Envio</label>
-                        <input type="datetime-local" class="form-input">
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-outline" onclick="closeModal('modal-email')">Cancelar</button>
-                <button class="btn btn-primary" onclick="sendCampaign()">
-                    <i class="iconoir-send"></i>
-                    Enviar Campanha
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // ===================================
-        // THEME TOGGLE
-        // ===================================
-        function toggleTheme() {
-            const html = document.documentElement;
-            const theme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-            html.setAttribute('data-theme', theme);
-            localStorage.setItem('admin-theme', theme);
-            updateThemeUI(theme);
-        }
-
-        function updateThemeUI(theme) {
-            const icon = document.getElementById('theme-icon');
-            const text = document.getElementById('theme-text');
-            if (theme === 'dark') {
-                icon.className = 'iconoir-sun-light';
-                text.textContent = 'Claro';
-            } else {
-                icon.className = 'iconoir-half-moon';
-                text.textContent = 'Escuro';
-            }
-        }
-
-        window.addEventListener('DOMContentLoaded', () => {
-            const theme = localStorage.getItem('admin-theme') || 'dark';
-            document.documentElement.setAttribute('data-theme', theme);
-            updateThemeUI(theme);
-        });
-
-        // ===================================
-        // PAGE NAVIGATION
-        // ===================================
-        function showPage(pageId) {
-            // Esconder todas as páginas
-            document.querySelectorAll('.page-content').forEach(p => p.classList.add('hidden'));
-            
-            // Mostrar página selecionada
-            document.getElementById(`page-${pageId}`).classList.remove('hidden');
-            
-            // Atualizar sidebar
-            document.querySelectorAll('.sidebar-nav-link').forEach(link => {
-                link.classList.remove('active');
-            });
-            event.target.closest('.sidebar-nav-link').classList.add('active');
-        }
-
-        // ===================================
-        // TABS
-        // ===================================
-        function showTab(tabId) {
-            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
-            
-            event.target.classList.add('active');
-            document.getElementById(tabId).classList.add('active');
-        }
-
-        // ===================================
-        // MODALS
-        // ===================================
-        function openModal(modalId) {
-            document.getElementById(modalId).classList.add('active');
-        }
-
-        function closeModal(modalId) {
-            document.getElementById(modalId).classList.remove('active');
-        }
-
-        // ===================================
-        // PRODUCTS
-        // ===================================
-        function saveProduct() {
-            alert('? Produto salvo com sucesso!\n\n(Integração com MongoDB será implementada)');
-            closeModal('modal-product');
-        }
-
-        function editProduct(id) {
-            alert(`Editar produto #${id}`);
-        }
-
-        function deleteProduct(id) {
-            if (confirm('Tem certeza que deseja excluir este produto?')) {
-                alert(`? Produto #${id} excluído!`);
-            }
-        }
-
-        // ===================================
-        // EMAIL CAMPAIGNS
-        // ===================================
-        function sendCampaign() {
-            if (confirm('Enviar campanha para os destinatários selecionados?')) {
-                alert('?? Campanha enviada com sucesso!\n\n? 156 emails na fila\n? Enviando via smtp.porkbun.com');
-                closeModal('modal-email');
-            }
-        }
-
-        function testSMTP() {
-            alert('?? Testando configuração SMTP...\n\n? Enviando email de teste para: marceloquintinoalves25@gmail.com\n\nVerifique sua caixa de entrada!');
-        }
-
-        // ===================================
-        // UTILITIES
-        // ===================================
-        console.log('??? Arkana Admin Panel - Powered by Ávila Inc');
-    </script>
-</body>
-</html>
+                <button class="modal-close" onclick="closeModal('modal-email')">×</button>
