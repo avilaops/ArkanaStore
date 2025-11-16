@@ -1,126 +1,56 @@
-name: Deploy Arkana Store to Azure
+name: Deploy Arkana to Azure Static Web Apps
 
 on:
   push:
     branches: [main]
     paths:
-      - 'arkana-store-v2.html'
-      - 'arkana-store-landing.html'
-      - 'arkana-admin-panel.html'
+      - '*.html'
       - 'automation/**'
-      - '.github/workflows/azure-deploy.yml'
+      - '.github/workflows/**'
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    branches: [main]
   workflow_dispatch:
 
-env:
-  AZURE_WEBAPP_NAME: arkana-store
-  AZURE_WEBAPP_PACKAGE_PATH: '.'
-  PYTHON_VERSION: '3.11'
-  NODE_VERSION: '18.x'
-
 jobs:
-  build-and-deploy:
+  build_and_deploy:
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     runs-on: ubuntu-latest
+    name: Build and Deploy
     
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          submodules: true
 
-    - name: Setup Python ${{ env.PYTHON_VERSION }}
-      uses: actions/setup-python@v4
-      with:
-        python-version: ${{ env.PYTHON_VERSION }}
+      - name: Build And Deploy
+        id: builddeploy
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          action: "upload"
+          app_location: "/"
+          api_location: "automation/admin"
+          output_location: "/"
+          
+      - name: Deployment summary
+        run: |
+          echo "?? Deployment successful!"
+          echo "?? Sites deployed:"
+          echo "   ? arkana-admin-panel.html"
+          echo "   ? arkana-store-v2.html"
+          echo "   ? arkana-store-landing.html"
 
-    - name: Setup Node.js ${{ env.NODE_VERSION }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ env.NODE_VERSION }}
-
-    - name: Install Python dependencies
-      run: |
-        cd automation/admin
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-
-    - name: Create deployment package
-      run: |
-        mkdir -p deploy
-        
-        # Copy HTML sites
-        cp arkana-store-v2.html deploy/
-        cp arkana-store-landing.html deploy/
-        cp arkana-admin-panel.html deploy/index.html
-        
-        # Copy backend
-        cp -r automation deploy/
-        
-        # Copy config template
-        mkdir -p deploy/config
-        cp config/.env.arkana.template deploy/config/
-        
-        # Create web.config for Azure
-        cat > deploy/web.config << 'EOF'
-        <?xml version="1.0" encoding="utf-8"?>
-        <configuration>
-          <system.webServer>
-            <handlers>
-              <add name="PythonHandler" 
-                   path="*.py" 
-                   verb="*" 
-                   modules="FastCgiModule" 
-                   scriptProcessor="D:\home\python\python.exe|D:\home\python\wfastcgi.py" 
-                   resourceType="Unspecified" 
-                   requireAccess="Script"/>
-            </handlers>
-            <staticContent>
-              <mimeMap fileExtension=".json" mimeType="application/json"/>
-              <mimeMap fileExtension=".wasm" mimeType="application/wasm"/>
-            </staticContent>
-            <rewrite>
-              <rules>
-                <rule name="API Routes" stopProcessing="true">
-                  <match url="^api/(.*)$"/>
-                  <action type="Rewrite" url="automation/admin/api_server.py/{R:1}"/>
-                </rule>
-                <rule name="Static Files" stopProcessing="true">
-                  <match url="^(.+\.(html|css|js|json|png|jpg|svg|woff2?))$"/>
-                  <action type="None"/>
-                </rule>
-              </rules>
-            </rewrite>
-          </system.webServer>
-          <appSettings>
-            <add key="WSGI_HANDLER" value="automation.admin.api_server.app"/>
-            <add key="PYTHONPATH" value="D:\home\site\wwwroot"/>
-          </appSettings>
-        </configuration>
-        EOF
-
-    - name: Deploy to Azure Web App
-      uses: azure/webapps-deploy@v2
-      with:
-        app-name: ${{ env.AZURE_WEBAPP_NAME }}
-        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-        package: ./deploy
-
-    - name: Azure CLI - Configure App Settings
-      uses: azure/CLI@v1
-      with:
-        azcliversion: 2.53.0
-        inlineScript: |
-          az webapp config appsettings set \
-            --name ${{ env.AZURE_WEBAPP_NAME }} \
-            --resource-group arkana-store-rg \
-            --settings \
-              FLASK_ENV=production \
-              PYTHON_VERSION=3.11 \
-              SCM_DO_BUILD_DURING_DEPLOYMENT=true
-
-    - name: Deployment summary
-      run: |
-        echo "?? Deployment successful!"
-        echo "?? Sites deployed:"
-        echo "   - arkana-store-v2.html"
-        echo "   - arkana-store-landing.html"
-        echo "   - arkana-admin-panel.html (as index.html)"
-        echo "?? Python backend: automation/admin/"
-        echo "?? URL: https://${{ env.AZURE_WEBAPP_NAME }}.azurewebsites.net"
+  close_pull_request:
+    if: github.event_name == 'pull_request' && github.event.action == 'closed'
+    runs-on: ubuntu-latest
+    name: Close Pull Request
+    steps:
+      - name: Close Pull Request
+        id: closepullrequest
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+          action: "close"
