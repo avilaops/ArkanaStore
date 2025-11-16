@@ -4,44 +4,63 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>??? Arkana Store - Produtos Maçônicos Premium</title>
+    <title>ARKANA - Moda Contemporânea Premium</title>
     
-    <meta name="description" content="Loja especializada em produtos maçônicos: camisetas, bermudas, anéis e acessórios. Qualidade premium para irmãos maçons.">
+    <meta name="description" content="ARKANA - Boutique de moda premium com design minimalista e qualidade excepcional. Coleções exclusivas para o homem moderno.">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Iconoir Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/iconoir-icons/iconoir@main/css/iconoir.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
     
     <style>
+        /* ===================================================================
+           PALETA DE CORES - BASEADA NA LOJA FÍSICA
+           ===================================================================
+           Foto 1: Tons claros (bege, creme, madeira clara)
+           Foto 2: Tons escuros (cinza grafite, marrom escuro, preto)
+           Foto 3: Tons terrosos (concreto, caramelo, madeira média)
+        */
+        
         :root {
-            --color-primary: #1a237e;
-            --color-secondary: #ffd700;
-            --color-accent: #c41e3a;
-            --color-dark: #1a1a1a;
-            --color-gray: #666666;
-            --color-white: #ffffff;
-            --font-heading: 'Cinzel', serif;
-            --font-body: 'Open Sans', sans-serif;
+            /* Cores principais (identidade real) */
+            --concrete: #d4cec5;           /* Concreto/cimento queimado */
+            --warm-beige: #e8dfd3;         /* Bege quente das paredes */
+            --wood-light: #c19a6b;         /* Madeira clara */
+            --wood-medium: #8b6f47;        /* Madeira média */
+            --wood-dark: #5c4a3a;          /* Madeira escura */
             
-            /* Light mode (padrão) */
-            --bg-primary: #ffffff;
-            --bg-secondary: #f8f9fa;
-            --text-primary: #1a1a1a;
-            --text-secondary: #666666;
-            --border-color: #e0e0e0;
+            --graphite: #2a2a2a;           /* Grafite (teto foto 2) */
+            --charcoal: #1a1a1a;           /* Carvão escuro */
+            --warm-gray: #6b6357;          /* Cinza quente */
+            
+            --accent-gold: #b8945f;        /* Ouro sutil (não berrante) */
+            --accent-copper: #b87333;      /* Cobre */
+            
+            /* Tema claro (padrão - como foto 1) */
+            --bg-primary: #f5f2ed;         /* Fundo bege claro */
+            --bg-secondary: #e8dfd3;       /* Bege secundário */
+            --bg-accent: #d4cec5;          /* Concreto */
+            
+            --text-primary: #2a2a2a;       /* Grafite escuro */
+            --text-secondary: #6b6357;     /* Cinza quente */
+            --text-muted: #9a9184;         /* Marrom claro */
+            
+            --border-color: #d4cec5;       /* Concreto sutil */
+            --shadow: rgba(0,0,0,0.08);
         }
 
-        /* Dark mode */
+        /* Tema escuro (como foto 2) */
         [data-theme="dark"] {
-            --color-primary: #5c6bc0;
-            --bg-primary: #1a1a1a;
-            --bg-secondary: #2d2d2d;
-            --text-primary: #ffffff;
-            --text-secondary: #b0b0b0;
-            --border-color: #404040;
+            --bg-primary: #1a1a1a;         /* Preto puro */
+            --bg-secondary: #2a2a2a;       /* Grafite */
+            --bg-accent: #3a3a3a;          /* Cinza escuro */
+            
+            --text-primary: #f5f2ed;       /* Bege claro */
+            --text-secondary: #c19a6b;     /* Madeira clara */
+            --text-muted: #8b6f47;         /* Madeira média */
+            
+            --border-color: #3a3a3a;       /* Cinza escuro */
+            --shadow: rgba(0,0,0,0.4);
         }
 
         * {
@@ -51,269 +70,422 @@
         }
 
         body {
-            font-family: var(--font-body);
+            font-family: 'Inter', -apple-system, sans-serif;
             color: var(--text-primary);
             background: var(--bg-primary);
             line-height: 1.6;
-            transition: background 0.3s ease, color 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         h1, h2, h3 {
-            font-family: var(--font-heading);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
             color: var(--text-primary);
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        /* THEME TOGGLE */
+        /* ===================================================================
+           THEME TOGGLE - Minimalista
+           =================================================================== */
+        
         .theme-toggle {
             position: fixed;
-            top: 20px;
-            right: 20px;
+            top: 2rem;
+            right: 2rem;
             z-index: 9999;
             background: var(--bg-secondary);
-            border: 2px solid var(--border-color);
+            border: 1px solid var(--border-color);
             border-radius: 50px;
-            padding: 0.5rem 1rem;
+            padding: 0.75rem 1.5rem;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            gap: 0.75rem;
+            box-shadow: 0 2px 8px var(--shadow);
             transition: all 0.3s;
-        }
-
-        .theme-toggle:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 16px rgba(0,0,0,0.3);
-        }
-
-        .theme-toggle i {
-            font-size: 1.2rem;
-        }
-
-        .theme-toggle-text {
-            font-size: 0.9rem;
-            font-weight: 600;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
             color: var(--text-primary);
         }
 
-        /* HERO */
+        .theme-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px var(--shadow);
+            border-color: var(--accent-gold);
+        }
+
+        .theme-icon {
+            width: 18px;
+            height: 18px;
+            opacity: 0.8;
+        }
+
+        /* ===================================================================
+           HERO - Estilo loja física
+           =================================================================== */
+        
         .hero {
             min-height: 100vh;
-            background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
-            background-image: 
-                repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,215,0,.03) 35px, rgba(255,215,0,.03) 70px),
-                linear-gradient(135deg, #1a237e 0%, #283593 100%);
-            color: var(--color-white);
+            background: 
+                linear-gradient(
+                    180deg,
+                    rgba(26,26,26,0.7) 0%,
+                    rgba(42,42,42,0.5) 100%
+                ),
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%23d4cec5" width="1200" height="800"/><g opacity="0.3"><line x1="0" y1="0" x2="1200" y2="800" stroke="%238b6f47" stroke-width="1"/><line x1="400" y1="0" x2="800" y2="800" stroke="%238b6f47" stroke-width="1"/></g></svg>') center/cover;
+            
             display: flex;
             align-items: center;
             justify-content: center;
-            text-align: center;
             position: relative;
+            overflow: hidden;
         }
 
         [data-theme="dark"] .hero {
-            background: linear-gradient(135deg, #0a0e27 0%, #1a1a2e 100%);
+            background: 
+                linear-gradient(
+                    180deg,
+                    rgba(26,26,26,0.95) 0%,
+                    rgba(42,42,42,0.9) 100%
+                ),
+                repeating-linear-gradient(
+                    90deg,
+                    #1a1a1a 0px,
+                    #2a2a2a 1px,
+                    #1a1a1a 2px,
+                    #1a1a1a 100px
+                );
+        }
+
+        /* Efeito madeira sutil */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                repeating-linear-gradient(
+                    90deg,
+                    transparent 0%,
+                    rgba(193,154,107,0.02) 50%,
+                    transparent 100%
+                );
+            background-size: 200px 100%;
+            pointer-events: none;
         }
 
         .hero-content {
+            position: relative;
             z-index: 2;
+            text-align: center;
+            max-width: 900px;
             padding: 4rem 2rem;
         }
 
-        .hero-symbol {
-            font-size: 6rem;
-            margin-bottom: 2rem;
-            color: var(--color-secondary);
-            text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
-            animation: pulse 3s infinite;
+        /* Logo ARKANA - estilo loja */
+        .hero-logo {
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 3rem;
+            position: relative;
         }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.05); opacity: 0.9; }
+        .logo-circle {
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--accent-gold);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(212,206,197,0.05);
+            backdrop-filter: blur(10px);
+            box-shadow: 
+                0 0 40px rgba(184,148,95,0.2),
+                inset 0 0 40px rgba(184,148,95,0.05);
+        }
+
+        .logo-letter {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 4rem;
+            font-weight: 300;
+            color: var(--accent-gold);
+            line-height: 1;
+            margin-bottom: -0.5rem;
+        }
+
+        .logo-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 300;
+            letter-spacing: 0.3em;
+            color: var(--accent-gold);
+        }
+
+        .hero-tagline {
+            font-size: 1.1rem;
+            font-weight: 300;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--wood-light);
+            margin-bottom: 1rem;
+            opacity: 0.9;
         }
 
         .hero-title {
-            font-size: 4rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            letter-spacing: 2px;
+            font-size: 3rem;
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.1em;
+            color: var(--warm-beige);
         }
 
-        .hero-subtitle {
-            font-size: 1.8rem;
-            color: var(--color-secondary);
-            margin-bottom: 2rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
+        [data-theme="dark"] .hero-title {
+            color: var(--warm-beige);
         }
 
         .hero-description {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
+            font-weight: 300;
+            line-height: 1.8;
+            color: var(--concrete);
             margin-bottom: 3rem;
-            opacity: 0.95;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .hero-cta {
             display: flex;
-            gap: 1rem;
-            justify-content: center;
-            margin-bottom: 2rem;
-        }
-
-        .btn {
-            padding: 1rem 2.5rem;
-            border-radius: 8px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
-            color: var(--color-dark);
-            border: none;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--color-white);
-            border: 2px solid var(--color-secondary);
-        }
-
-        .btn-secondary:hover {
-            background: var(--color-secondary);
-            color: var(--color-dark);
-        }
-
-        .hero-badges {
-            display: flex;
-            gap: 1rem;
+            gap: 1.5rem;
             justify-content: center;
             flex-wrap: wrap;
         }
 
-        .badge {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 215, 0, 0.3);
-            font-size: 0.9rem;
+        /* Botões estilo loja */
+        .btn {
+            padding: 1.2rem 2.5rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            text-decoration: none;
+            border: 1px solid;
+            border-radius: 2px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.75rem;
+            position: relative;
+            overflow: hidden;
         }
 
-        /* CATEGORIAS */
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: 0.6s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: var(--accent-gold);
+            border-color: var(--accent-gold);
+            color: var(--charcoal);
+        }
+
+        .btn-primary:hover {
+            background: var(--wood-medium);
+            border-color: var(--wood-medium);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(184,148,95,0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border-color: var(--concrete);
+            color: var(--concrete);
+        }
+
+        .btn-secondary:hover {
+            background: var(--concrete);
+            color: var(--charcoal);
+        }
+
+        /* ===================================================================
+           CATEGORIAS - Grid minimalista
+           =================================================================== */
+        
         .categories {
-            padding: 6rem 0;
+            padding: 8rem 0;
             background: var(--bg-primary);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
         }
 
         .section-title {
             font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 4rem;
-            position: relative;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
         }
 
         .section-title::after {
             content: '';
             display: block;
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(90deg, #ffd700, #ffed4e);
-            margin: 1rem auto 0;
-            border-radius: 2px;
+            width: 60px;
+            height: 1px;
+            background: var(--accent-gold);
+            margin: 2rem auto 0;
         }
 
         .categories-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1px;
+            background: var(--border-color);
         }
 
         .category-card {
             background: var(--bg-secondary);
-            border: 2px solid var(--border-color);
-            border-radius: 16px;
-            padding: 2rem;
+            padding: 4rem 2rem;
             text-align: center;
-            transition: all 0.3s;
+            transition: all 0.4s;
             cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Efeito textura madeira */
+        .category-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                repeating-linear-gradient(
+                    90deg,
+                    transparent 0%,
+                    rgba(139,111,71,0.03) 50%,
+                    transparent 100%
+                );
+            background-size: 100px 100%;
+            opacity: 0;
+            transition: 0.4s;
+        }
+
+        .category-card:hover::before {
+            opacity: 1;
         }
 
         .category-card:hover {
-            border-color: var(--color-secondary);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            background: var(--bg-accent);
+            transform: translateY(-4px);
         }
 
         .category-icon {
-            font-size: 4rem;
-            margin-bottom: 1rem;
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            color: var(--accent-gold);
+            opacity: 0.8;
         }
 
         .category-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+            font-weight: 400;
+            margin-bottom: 0.75rem;
+            letter-spacing: 0.1em;
         }
 
         .category-card p {
             color: var(--text-secondary);
-            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            letter-spacing: 0.05em;
         }
 
-        /* PRODUTOS */
+        .category-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--accent-gold);
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .category-link:hover {
+            gap: 0.75rem;
+            color: var(--wood-medium);
+        }
+
+        /* ===================================================================
+           PRODUTOS - Estilo boutique
+           =================================================================== */
+        
         .featured-products {
-            padding: 6rem 0;
+            padding: 8rem 0;
             background: var(--bg-secondary);
         }
 
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 2rem;
-            margin-top: 3rem;
+            margin-top: 4rem;
         }
 
         .product-card {
             background: var(--bg-primary);
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            transition: all 0.3s;
             border: 1px solid var(--border-color);
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
         }
 
         .product-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            box-shadow: 0 16px 32px var(--shadow);
+            border-color: var(--accent-gold);
         }
 
         .product-image {
             position: relative;
             width: 100%;
-            padding-top: 100%;
-            background: var(--border-color);
+            padding-top: 125%;
+            background: var(--bg-accent);
             overflow: hidden;
         }
 
@@ -324,179 +496,266 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: 0.5s;
+            transition: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            filter: saturate(0.9);
         }
 
         .product-card:hover .product-image img {
-            transform: scale(1.1);
+            transform: scale(1.08);
+            filter: saturate(1);
         }
 
         .product-badge {
             position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: var(--color-accent);
-            color: white;
-            padding: 0.4rem 0.8rem;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            font-weight: 700;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: var(--charcoal);
+            color: var(--accent-gold);
+            padding: 0.5rem 1rem;
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
             text-transform: uppercase;
-        }
-
-        .product-badge.new {
-            background: #4caf50;
-        }
-
-        .product-badge.premium {
-            background: linear-gradient(135deg, #ffd700, #ffed4e);
-            color: var(--color-dark);
+            border: 1px solid var(--accent-gold);
         }
 
         .product-info {
-            padding: 1.5rem;
+            padding: 2rem;
         }
 
         .product-info h3 {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-            color: var(--text-primary);
+            font-size: 1.1rem;
+            font-weight: 400;
+            margin-bottom: 0.75rem;
+            letter-spacing: 0.05em;
         }
 
         .product-description {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            font-weight: 300;
             color: var(--text-secondary);
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
             min-height: 40px;
+            line-height: 1.6;
         }
 
         .product-footer {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding-top: 1rem;
+            padding-top: 1.5rem;
             border-top: 1px solid var(--border-color);
         }
 
         .product-price {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--color-primary);
+            font-size: 1.4rem;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            color: var(--text-primary);
         }
 
         .btn-sm {
-            padding: 0.5rem 1rem;
-            font-size: 0.9rem;
+            padding: 0.75rem 1.5rem;
+            font-size: 0.75rem;
         }
 
-        /* TESTIMONIALS */
+        /* ===================================================================
+           DEPOIMENTOS - Minimalista
+           =================================================================== */
+        
         .testimonials {
-            padding: 6rem 0;
+            padding: 8rem 0;
             background: var(--bg-primary);
         }
 
         .testimonials-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 2rem;
-            margin-top: 3rem;
+            margin-top: 4rem;
         }
 
         .testimonial-card {
             background: var(--bg-secondary);
-            border-radius: 16px;
-            padding: 2rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             border: 1px solid var(--border-color);
+            padding: 3rem 2.5rem;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 1.5rem;
+            left: 2rem;
+            font-size: 5rem;
+            font-family: Georgia, serif;
+            color: var(--accent-gold);
+            opacity: 0.15;
+            line-height: 1;
+        }
+
+        .testimonial-card:hover {
+            border-color: var(--accent-gold);
         }
 
         .testimonial-stars {
-            color: var(--color-secondary);
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
+            color: var(--accent-gold);
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.25rem;
         }
 
         .testimonial-text {
-            font-style: italic;
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            font-weight: 300;
             line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-color);
         }
 
         .testimonial-author strong {
-            color: var(--color-primary);
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            color: var(--text-primary);
         }
 
-        /* FINAL CTA */
+        .testimonial-author span {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 300;
+        }
+
+        /* ===================================================================
+           FOOTER / CTA FINAL
+           =================================================================== */
+        
         .final-cta {
-            padding: 6rem 0;
-            background: linear-gradient(135deg, #1a237e 0%, #311b92 100%);
-            color: white;
+            padding: 8rem 0;
+            background: var(--charcoal);
+            color: var(--warm-beige);
             text-align: center;
+            position: relative;
         }
 
-        [data-theme="dark"] .final-cta {
-            background: linear-gradient(135deg, #0a0e27 0%, #16213e 100%);
+        /* Efeito vigas de madeira (foto 2) */
+        .final-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: 
+                repeating-linear-gradient(
+                    90deg,
+                    var(--wood-dark) 0%,
+                    var(--wood-dark) 15%,
+                    var(--charcoal) 15%,
+                    var(--charcoal) 20%
+                );
         }
 
         .final-cta h2 {
             font-size: 2.5rem;
-            color: white;
-            margin-bottom: 1rem;
+            font-weight: 300;
+            color: var(--warm-beige);
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.1em;
         }
 
-        .contact-links {
+        .final-cta p {
+            font-size: 1.1rem;
+            font-weight: 300;
+            color: var(--concrete);
+            margin-bottom: 3rem;
+            letter-spacing: 0.05em;
+        }
+
+        .contact-info {
             display: flex;
             flex-direction: column;
-            gap: 0.5rem;
+            gap: 1rem;
             align-items: center;
-            margin-top: 2rem;
+            margin-top: 4rem;
         }
 
-        .contact-links a {
-            color: var(--color-secondary);
-            font-weight: 600;
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--accent-gold);
             text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
+            font-size: 0.95rem;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            transition: 0.3s;
+            padding: 0.75rem 1.5rem;
+            border: 1px solid transparent;
         }
 
-        .contact-links a:hover {
-            text-decoration: underline;
+        .contact-item:hover {
+            border-color: var(--accent-gold);
+            background: rgba(184,148,95,0.05);
         }
 
-        /* WHATSAPP FLOAT */
+        /* ===================================================================
+           WHATSAPP FLOAT - Discreto
+           =================================================================== */
+        
         .whatsapp-float {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 60px;
-            height: 60px;
-            background: #25d366;
+            bottom: 2rem;
+            right: 2rem;
+            width: 64px;
+            height: 64px;
+            background: var(--wood-dark);
+            border: 1px solid var(--accent-gold);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            z-index: 1000;
-            transition: 0.3s;
+            font-size: 1.8rem;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+            z-index: 999;
+            transition: all 0.3s;
             text-decoration: none;
-            color: white;
+            color: var(--accent-gold);
         }
 
         .whatsapp-float:hover {
-            transform: scale(1.1);
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 8px 24px rgba(184,148,95,0.4);
+            background: var(--accent-gold);
+            color: var(--charcoal);
         }
 
-        /* RESPONSIVE */
+        /* ===================================================================
+           RESPONSIVE
+           =================================================================== */
+        
         @media (max-width: 768px) {
-            .hero-title { font-size: 2.5rem; }
-            .hero-subtitle { font-size: 1.2rem; }
-            .hero-cta { flex-direction: column; }
+            .hero-logo { width: 140px; height: 140px; }
+            .logo-letter { font-size: 3rem; }
+            .logo-text { font-size: 1.1rem; }
+            .hero-title { font-size: 2rem; }
+            .hero-tagline { font-size: 0.9rem; }
             .section-title { font-size: 2rem; }
-            .theme-toggle { top: 10px; right: 10px; padding: 0.4rem 0.8rem; }
+            .hero-cta { flex-direction: column; width: 100%; }
+            .btn { width: 100%; justify-content: center; }
+            .categories-grid { grid-template-columns: 1fr; gap: 1px; }
+            .products-grid { grid-template-columns: 1fr; }
+            .theme-toggle { top: 1rem; right: 1rem; padding: 0.5rem 1rem; }
         }
     </style>
 </head>
@@ -504,48 +763,37 @@
 <body>
     <!-- THEME TOGGLE -->
     <button class="theme-toggle" onclick="toggleTheme()" aria-label="Alternar tema">
-        <i class="iconoir-sun-light" id="theme-icon"></i>
-        <span class="theme-toggle-text" id="theme-text">Claro</span>
+        <span class="theme-icon">?</span>
+        <span id="theme-text">Claro</span>
     </button>
 
     <!-- HERO SECTION -->
     <section class="hero">
         <div class="hero-content">
-            <div class="hero-symbol">?</div>
+            <!-- Logo ARKANA (como na loja) -->
+            <div class="hero-logo">
+                <div class="logo-circle">
+                    <div class="logo-letter">A</div>
+                    <div class="logo-text">ARKANA</div>
+                </div>
+            </div>
             
-            <h1 class="hero-title">??? ARKANA STORE</h1>
+            <p class="hero-tagline">Moda Contemporânea Premium</p>
             
-            <p class="hero-subtitle">Produtos Maçônicos de Qualidade</p>
+            <h1 class="hero-title">Coleção Essencial</h1>
             
             <p class="hero-description">
-                Camisetas, bermudas e acessórios para irmãos maçons<br>
-                Qualidade premium • Envio rápido • Preços justos
+                Peças atemporais com design minimalista e qualidade excepcional.<br>
+                Produzidas com cuidado artesanal e materiais nobres.
             </p>
             
             <div class="hero-cta">
                 <a href="#produtos" class="btn btn-primary">
-                    <i class="iconoir-shopping-bag"></i>
-                    Ver Produtos
+                    Explorar Coleção
                 </a>
                 <a href="https://wa.me/5517996656163" class="btn btn-secondary" target="_blank">
-                    <i class="iconoir-chat-bubble"></i>
-                    WhatsApp
+                    Falar Conosco
                 </a>
-            </div>
-            
-            <div class="hero-badges">
-                <span class="badge">
-                    <i class="iconoir-delivery-truck"></i>
-                    Frete Grátis acima de R$ 150
-                </span>
-                <span class="badge">
-                    <i class="iconoir-credit-card"></i>
-                    Parcelamento sem juros
-                </span>
-                <span class="badge">
-                    <i class="iconoir-refresh-double"></i>
-                    Troca facilitada
-                </span>
             </div>
         </div>
     </section>
@@ -553,54 +801,45 @@
     <!-- CATEGORIAS -->
     <section class="categories">
         <div class="container">
-            <h2 class="section-title">Nossas Categorias</h2>
+            <div class="section-header">
+                <p class="section-label">Nossas Coleções</p>
+                <h2 class="section-title">Explore por Categoria</h2>
+            </div>
             
             <div class="categories-grid">
                 <div class="category-card">
-                    <div class="category-icon">
-                        <i class="iconoir-t-shirt" style="font-size: 4rem;"></i>
-                    </div>
+                    <div class="category-icon">??</div>
                     <h3>Camisetas</h3>
-                    <p>Estampas maçônicas exclusivas</p>
-                    <a href="#produtos" class="btn btn-primary btn-sm">
-                        <i class="iconoir-arrow-right"></i>
-                        Ver Camisetas
+                    <p>Corte moderno, tecidos premium</p>
+                    <a href="#produtos" class="category-link">
+                        Ver Coleção ?
                     </a>
                 </div>
                 
                 <div class="category-card">
-                    <div class="category-icon">
-                        <i class="iconoir-shorts" style="font-size: 4rem;"></i>
-                    </div>
+                    <div class="category-icon">??</div>
                     <h3>Bermudas</h3>
-                    <p>Conforto e estilo casual</p>
-                    <a href="#produtos" class="btn btn-primary btn-sm">
-                        <i class="iconoir-arrow-right"></i>
-                        Ver Bermudas
+                    <p>Conforto e versatilidade</p>
+                    <a href="#produtos" class="category-link">
+                        Ver Coleção ?
                     </a>
                 </div>
                 
                 <div class="category-card">
-                    <div class="category-icon">
-                        <i class="iconoir-sparks" style="font-size: 4rem;"></i>
-                    </div>
+                    <div class="category-icon">??</div>
                     <h3>Acessórios</h3>
-                    <p>Anéis, pins, pingentes e mais</p>
-                    <a href="#produtos" class="btn btn-primary btn-sm">
-                        <i class="iconoir-arrow-right"></i>
-                        Ver Acessórios
+                    <p>Detalhes que fazem a diferença</p>
+                    <a href="#produtos" class="category-link">
+                        Ver Coleção ?
                     </a>
                 </div>
                 
                 <div class="category-card">
-                    <div class="category-icon">
-                        <i class="iconoir-hat" style="font-size: 4rem;"></i>
-                    </div>
+                    <div class="category-icon">??</div>
                     <h3>Bonés</h3>
-                    <p>Proteção com estilo</p>
-                    <a href="#produtos" class="btn btn-primary btn-sm">
-                        <i class="iconoir-arrow-right"></i>
-                        Ver Bonés
+                    <p>Estilo urbano refinado</p>
+                    <a href="#produtos" class="category-link">
+                        Ver Coleção ?
                     </a>
                 </div>
             </div>
@@ -610,25 +849,25 @@
     <!-- PRODUTOS EM DESTAQUE -->
     <section id="produtos" class="featured-products">
         <div class="container">
-            <h2 class="section-title">
-                <i class="iconoir-star"></i>
-                Produtos em Destaque
-            </h2>
+            <div class="section-header">
+                <p class="section-label">Destaques</p>
+                <h2 class="section-title">Produtos Selecionados</h2>
+            </div>
             
             <div class="products-grid">
                 <!-- Produto 1 -->
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="https://via.placeholder.com/400x400/1a237e/ffd700?text=?" alt="Camiseta Compasso e Esquadro">
-                        <span class="product-badge">Mais Vendido</span>
+                        <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800&auto=format&fit=crop" 
+                             alt="Camiseta Premium">
+                        <span class="product-badge">Destaque</span>
                     </div>
                     <div class="product-info">
-                        <h3>Camiseta Compasso e Esquadro</h3>
-                        <p class="product-description">100% algodão, estampa de alta qualidade</p>
+                        <h3>Camiseta Essential</h3>
+                        <p class="product-description">100% algodão egípcio, corte slim fit</p>
                         <div class="product-footer">
                             <span class="product-price">R$ 89,90</span>
-                            <button class="btn btn-primary btn-sm" onclick="comprar('Camiseta Compasso e Esquadro', 89.90)">
-                                <i class="iconoir-cart"></i>
+                            <button class="btn btn-primary btn-sm" onclick="comprar('Camiseta Essential', 89.90)">
                                 Comprar
                             </button>
                         </div>
@@ -638,16 +877,16 @@
                 <!-- Produto 2 -->
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="https://via.placeholder.com/400x400/1a237e/ffd700?text=??" alt="Bermuda Logos Maçônicos">
-                        <span class="product-badge new">Novo</span>
+                        <img src="https://images.unsplash.com/photo-1591195853828-11db59a44f6b?w=800&auto=format&fit=crop" 
+                             alt="Bermuda Premium">
+                        <span class="product-badge">Novo</span>
                     </div>
                     <div class="product-info">
-                        <h3>Bermuda Logos Maçônicos</h3>
-                        <p class="product-description">Tecido leve, ideal para verão</p>
+                        <h3>Bermuda Urban</h3>
+                        <p class="product-description">Tecido respirável, acabamento impecável</p>
                         <div class="product-footer">
-                            <span class="product-price">R$ 79,90</span>
-                            <button class="btn btn-primary btn-sm" onclick="comprar('Bermuda Logos', 79.90)">
-                                <i class="iconoir-cart"></i>
+                            <span class="product-price">R$ 129,90</span>
+                            <button class="btn btn-primary btn-sm" onclick="comprar('Bermuda Urban', 129.90)">
                                 Comprar
                             </button>
                         </div>
@@ -657,16 +896,16 @@
                 <!-- Produto 3 -->
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="https://via.placeholder.com/400x400/1a237e/ffd700?text=??" alt="Anel Mestre Maçom">
-                        <span class="product-badge premium">Premium</span>
+                        <img src="https://images.unsplash.com/photo-1603561596112-0a132b757442?w=800&auto=format&fit=crop" 
+                             alt="Anel Premium">
+                        <span class="product-badge">Premium</span>
                     </div>
                     <div class="product-info">
-                        <h3>Anel Mestre Maçom</h3>
-                        <p class="product-description">Aço inoxidável, acabamento polido</p>
+                        <h3>Anel Signature</h3>
+                        <p class="product-description">Aço inoxidável 316L, design minimalista</p>
                         <div class="product-footer">
-                            <span class="product-price">R$ 149,90</span>
-                            <button class="btn btn-primary btn-sm" onclick="comprar('Anel Mestre', 149.90)">
-                                <i class="iconoir-cart"></i>
+                            <span class="product-price">R$ 179,90</span>
+                            <button class="btn btn-primary btn-sm" onclick="comprar('Anel Signature', 179.90)">
                                 Comprar
                             </button>
                         </div>
@@ -676,15 +915,15 @@
                 <!-- Produto 4 -->
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="https://via.placeholder.com/400x400/1a237e/ffd700?text=G.A.D.U" alt="Boné G.A.D.U">
+                        <img src="https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=800&auto=format&fit=crop" 
+                             alt="Boné Premium">
                     </div>
                     <div class="product-info">
-                        <h3>Boné G.A.D.U</h3>
-                        <p class="product-description">Bordado em alto relevo</p>
+                        <h3>Boné Classic</h3>
+                        <p class="product-description">Bordado minimalista, ajuste perfeito</p>
                         <div class="product-footer">
-                            <span class="product-price">R$ 59,90</span>
-                            <button class="btn btn-primary btn-sm" onclick="comprar('Boné GADU', 59.90)">
-                                <i class="iconoir-cart"></i>
+                            <span class="product-price">R$ 79,90</span>
+                            <button class="btn btn-primary btn-sm" onclick="comprar('Boné Classic', 79.90)">
                                 Comprar
                             </button>
                         </div>
@@ -697,42 +936,42 @@
     <!-- DEPOIMENTOS -->
     <section class="testimonials">
         <div class="container">
-            <h2 class="section-title">
-                <i class="iconoir-quote"></i>
-                O que dizem nossos irmãos
-            </h2>
+            <div class="section-header">
+                <p class="section-label">Avaliações</p>
+                <h2 class="section-title">O que nossos clientes dizem</h2>
+            </div>
             
             <div class="testimonials-grid">
                 <div class="testimonial-card">
-                    <div class="testimonial-stars">?????</div>
+                    <div class="testimonial-stars">? ? ? ? ?</div>
                     <p class="testimonial-text">
-                        "Produtos de excelente qualidade! A camiseta ficou perfeita e a estampa não desbota. Recomendo!"
+                        Qualidade excepcional. As peças têm um caimento perfeito e o tecido é de primeira linha. Vale cada centavo.
                     </p>
                     <div class="testimonial-author">
-                        <i class="iconoir-user"></i>
-                        <strong>Ir? João Silva</strong> - Loja Luz e Verdade
+                        <strong>João Silva</strong>
+                        <span>— Cliente verificado</span>
                     </div>
                 </div>
                 
                 <div class="testimonial-card">
-                    <div class="testimonial-stars">?????</div>
+                    <div class="testimonial-stars">? ? ? ? ?</div>
                     <p class="testimonial-text">
-                        "Entrega rápida e produto conforme anunciado. O anel é lindo e bem acabado."
+                        Atendimento impecável e entrega rápida. As peças são exatamente como nas fotos, com acabamento premium.
                     </p>
                     <div class="testimonial-author">
-                        <i class="iconoir-user"></i>
-                        <strong>Ir? Pedro Santos</strong> - Loja Harmonia Universal
+                        <strong>Pedro Santos</strong>
+                        <span>— Cliente verificado</span>
                     </div>
                 </div>
                 
                 <div class="testimonial-card">
-                    <div class="testimonial-stars">?????</div>
+                    <div class="testimonial-stars">? ? ? ? ?</div>
                     <p class="testimonial-text">
-                        "Atendimento impecável! Marcelo é muito atencioso e ajudou a escolher o tamanho certo."
+                        Design minimalista que valoriza. Comprei 3 camisetas e todas mantêm a qualidade após várias lavagens.
                     </p>
                     <div class="testimonial-author">
-                        <i class="iconoir-user"></i>
-                        <strong>Ir? Carlos Oliveira</strong> - Loja Estrela do Oriente
+                        <strong>Carlos Oliveira</strong>
+                        <span>— Cliente verificado</span>
                     </div>
                 </div>
             </div>
@@ -742,43 +981,42 @@
     <!-- CTA FINAL -->
     <section class="final-cta">
         <div class="container">
-            <h2>Pronto para fazer seu pedido?</h2>
-            <p>Navegue pelo nosso catálogo e encontre produtos que expressam sua jornada maçônica</p>
+            <h2>Visite nossa loja</h2>
+            <p>Experimente a coleção pessoalmente ou faça seu pedido online</p>
             
-            <a href="#produtos" class="btn btn-primary" style="font-size: 1.3rem; padding: 1.25rem 3rem; margin: 2rem 0;">
-                <i class="iconoir-shopping-bag"></i>
-                Explorar Catálogo Completo
+            <a href="#produtos" class="btn btn-primary" style="font-size: 1rem; padding: 1.5rem 3rem; margin: 2rem 0;">
+                Ver Coleção Completa
             </a>
             
-            <div class="contact-links">
-                <p style="opacity: 0.8;">Dúvidas? Entre em contato:</p>
-                <a href="https://wa.me/5517996656163" target="_blank">
-                    <i class="iconoir-message"></i>
-                    WhatsApp: (17) 99665-6163
+            <div class="contact-info">
+                <a href="https://wa.me/5517996656163" class="contact-item" target="_blank">
+                    ?? WhatsApp: (17) 99665-6163
                 </a>
-                <a href="mailto:marceloquintinoalves25@gmail.com">
-                    <i class="iconoir-mail"></i>
-                    Email: marceloquintinoalves25@gmail.com
+                <a href="mailto:marceloquintinoalves25@gmail.com" class="contact-item">
+                    ?? marceloquintinoalves25@gmail.com
                 </a>
-                <a href="https://instagram.com/marcelo_quintino3.0" target="_blank">
-                    <i class="iconoir-instagram"></i>
-                    Instagram: @marcelo_quintino3.0
+                <a href="https://instagram.com/marcelo_quintino3.0" class="contact-item" target="_blank">
+                    ?? @marcelo_quintino3.0
                 </a>
             </div>
+            
+            <p style="margin-top: 4rem; opacity: 0.5; font-size: 0.8rem; letter-spacing: 0.1em;">
+                ARKANA © 2024 — Moda premium com design atemporal
+            </p>
         </div>
     </section>
 
-    <!-- WHATSAPP FLOAT BUTTON -->
-    <a href="https://wa.me/5517996656163?text=Olá! Vim do site da Arkana Store" 
+    <!-- WHATSAPP FLOAT -->
+    <a href="https://wa.me/5517996656163?text=Olá! Vim do site da Arkana" 
        class="whatsapp-float" 
        target="_blank"
        title="Falar no WhatsApp">
-        <i class="iconoir-chat-bubble"></i>
+        ??
     </a>
 
     <script>
         // ===================================
-        // THEME TOGGLE (Dia/Noite)
+        // THEME TOGGLE
         // ===================================
         
         function toggleTheme() {
@@ -787,27 +1025,27 @@
             const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
             
             html.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
+            localStorage.setItem('arkana-theme', newTheme);
             
             updateThemeUI(newTheme);
         }
         
         function updateThemeUI(theme) {
-            const icon = document.getElementById('theme-icon');
+            const icon = document.querySelector('.theme-icon');
             const text = document.getElementById('theme-text');
             
             if (theme === 'dark') {
-                icon.className = 'iconoir-sun-light';
+                icon.textContent = '?';
                 text.textContent = 'Claro';
             } else {
-                icon.className = 'iconoir-half-moon';
+                icon.textContent = '??';
                 text.textContent = 'Escuro';
             }
         }
         
         // Carregar tema salvo
         window.addEventListener('DOMContentLoaded', () => {
-            const savedTheme = localStorage.getItem('theme') || 'dark';
+            const savedTheme = localStorage.getItem('arkana-theme') || 'dark';
             document.documentElement.setAttribute('data-theme', savedTheme);
             updateThemeUI(savedTheme);
         });
@@ -817,7 +1055,7 @@
         // ===================================
         
         function comprar(produto, preco) {
-            const mensagem = `Olá! Gostaria de comprar:\n\n?? Produto: ${produto}\n?? Valor: R$ ${preco.toFixed(2)}\n\nPoderia me enviar mais informações?`;
+            const mensagem = `Olá! Gostaria de conhecer mais sobre:\n\n?? ${produto}\n?? R$ ${preco.toFixed(2)}\n\nPoderia me enviar detalhes?`;
             const url = `https://wa.me/5517996656163?text=${encodeURIComponent(mensagem)}`;
             window.open(url, '_blank');
         }
@@ -836,11 +1074,8 @@
             });
         });
 
-        // ===================================
-        // ANALYTICS
-        // ===================================
-        
-        console.log('??? Arkana Store - Powered by Ávila Inc (Rust + WASM ready)');
+        console.log('??? ARKANA — Premium Minimalist Fashion');
+        console.log('?? Powered by Ávila Inc (Rust + WebAssembly)');
     </script>
 </body>
 </html>
