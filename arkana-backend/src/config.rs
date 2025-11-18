@@ -12,9 +12,9 @@ impl AppConfig {
     pub fn from_env() -> Result<Self, Box<dyn std::error::Error>> {
         Ok(Self {
             api_base_url: std::env::var("API_BASE_URL")
-                .unwrap_or_else(|_| "http://localhost:8000".to_string()),
+                .unwrap_or_else(|_| "http://localhost:8080".to_string()),
             port: std::env::var("PORT")
-                .unwrap_or_else(|_| "8000".to_string())
+                .unwrap_or_else(|_| "8080".to_string())
                 .parse()?,
             mongo_uri: std::env::var("MONGODB_URI")
                 .unwrap_or_else(|_| "mongodb://localhost:27017".to_string()),
