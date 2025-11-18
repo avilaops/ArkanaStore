@@ -1,0 +1,137 @@
+name: Send Welcome Email
+
+on:
+  workflow_dispatch:
+    inputs:
+      recipient_email:
+        description: 'Email do destinatário'
+        required: true
+        type: string
+      recipient_name:
+        description: 'Nome do destinatário'
+        required: true
+        type: string
+      subject:
+        description: 'Assunto do email'
+        required: false
+        default: '🏪 Bem-vindo ao Arkana Store - Colaborador Adicionado'
+        type: string
+
+jobs:
+  send-email:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install python-dotenv
+
+      - name: Send Email
+        env:
+          SMTP_HOST: smtp.porkbun.com
+          SMTP_PORT: 587
+          SMTP_USER: dev@avila.inc
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          RECIPIENT_EMAIL: ${{ inputs.recipient_email }}
+          RECIPIENT_NAME: ${{ inputs.recipient_name }}
+          EMAIL_SUBJECT: ${{ inputs.subject }}
+        run: |
+          python - <<'EOF'
+          import smtplib
+          import os
+          from email.mime.text import MIMEText
+          from email.mime.multipart import MIMEMultipart
+          from pathlib import Path
+
+          # Configurações
+          smtp_host = os.getenv('SMTP_HOST')
+          smtp_port = int(os.getenv('SMTP_PORT'))
+          smtp_user = os.getenv('SMTP_USER')
+          smtp_password = os.getenv('SMTP_PASSWORD')
+          recipient = os.getenv('RECIPIENT_EMAIL')
+          recipient_name = os.getenv('RECIPIENT_NAME')
+          subject = os.getenv('EMAIL_SUBJECT')
+
+          # Ler HTML
+          html_path = Path('email-hastek-nex.html')
+          with open(html_path, 'r', encoding='utf-8') as f:
+              html_content = f.read()
+
+          # Personalizar com nome
+          html_content = html_content.replace('Olá! 👋', f'Olá {recipient_name}! 👋')
+
+          # Criar mensagem
+          msg = MIMEMultipart('alternative')
+          msg['From'] = f'Ávila Inc <{smtp_user}>'
+          msg['To'] = recipient
+          msg['Subject'] = subject
+
+          # Texto alternativo
+          texto_alternativo = f"""
+          Olá {recipient_name}!
+
+          Você foi adicionado como colaborador do repositório ArkanaStore.
+
+          Repositório: https://github.com/avilaops/ArkanaStore
+          Demo Live: https://avilaops.github.io/ArkanaStore/
+
+          Quick Start:
+          1. git clone https://github.com/avilaops/ArkanaStore.git
+          2. cd ArkanaStore
+          3. cp .env.example .env
+          4. docker-compose -f docker-compose.avila-full.yml up -d
+
+          Stack:
+          - Frontend: Yew (Rust WASM)
+          - Backend: Actix-web (Rust)
+          - Database: MongoDB 7.0
+          - Cache: Redis 7
+          - Storage: MinIO
+          - Monitoring: Prometheus + Grafana + Loki
+
+          Dúvidas? Entre em contato:
+          - Email: dev@avila.inc
+          - WhatsApp: (17) 99665-6163
+
+          Ávila Inc
+          """
+
+          texto_part = MIMEText(texto_alternativo, 'plain', 'utf-8')
+          html_part = MIMEText(html_content, 'html', 'utf-8')
+          msg.attach(texto_part)
+          msg.attach(html_part)
+
+          # Enviar
+          try:
+              print(f"📧 Conectando ao {smtp_host}:{smtp_port}...")
+              with smtplib.SMTP(smtp_host, smtp_port, timeout=30) as server:
+                  server.set_debuglevel(1)
+                  server.starttls()
+                  print(f"🔐 Autenticando como {smtp_user}...")
+                  server.login(smtp_user, smtp_password)
+                  print(f"📬 Enviando email para {recipient}...")
+                  server.send_message(msg)
+                  print(f"✅ Email enviado com sucesso!")
+          except Exception as e:
+              print(f"❌ Erro: {e}")
+              raise
+          EOF
+
+      - name: Summary
+        if: success()
+        run: |
+          echo "### ✅ Email Enviado com Sucesso!" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Destinatário:** ${{ inputs.recipient_email }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Nome:** ${{ inputs.recipient_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Assunto:** ${{ inputs.subject }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "📧 O email de boas-vindas foi enviado com sucesso!" >> $GITHUB_STEP_SUMMARY

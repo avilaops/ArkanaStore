@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bem-vindo ao Arkana Store - Projeto E-commerce</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #2a2a2a;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 700px;
+            margin: 40px auto;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            font-weight: 300;
+            letter-spacing: 0.15em;
+            margin-bottom: 10px;
+        }
+        
+        .header .subtitle {
+            color: #b8945f;
+            font-size: 14px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+        
+        .content {
+            padding: 40px 30px;
+        }
+        
+        .greeting {
+            font-size: 18px;
+            color: #2a2a2a;
+            margin-bottom: 20px;
+        }
+        
+        .section {
+            margin-bottom: 30px;
+        }
+        
+        .section h2 {
+            font-size: 20px;
+            color: #2a2a2a;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #b8945f;
+        }
+        
+        .section p {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        
+        .tech-stack {
+            background: #f8f8f8;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .tech-stack h3 {
+            color: #2a2a2a;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+        
+        .tech-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        
+        .tech-item {
+            display: flex;
+            align-items: center;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .tech-item:before {
+            content: "✓";
+            color: #b8945f;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+        
+        .features {
+            background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .features h3 {
+            color: #b8945f;
+            font-size: 16px;
+            margin-bottom: 15px;
+            letter-spacing: 0.1em;
+        }
+        
+        .features ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .features li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .features li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #b8945f;
+            font-weight: bold;
+        }
+        
+        .cta-section {
+            background: #f8f8f8;
+            padding: 25px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .cta-section h3 {
+            color: #2a2a2a;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            margin: 10px 5px;
+            background: #b8945f;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+        
+        .btn:hover {
+            background: #9a7a4f;
+        }
+        
+        .btn-secondary {
+            background: #2a2a2a;
+        }
+        
+        .btn-secondary:hover {
+            background: #1a1a1a;
+        }
+        
+        .credentials {
+            background: #fff3e0;
+            border-left: 4px solid #b8945f;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .credentials h3 {
+            color: #2a2a2a;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        
+        .credentials code {
+            background: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #d63384;
+        }
+        
+        .footer {
+            background: #2a2a2a;
+            color: #ccc;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .footer p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+        
+        .footer a {
+            color: #b8945f;
+            text-decoration: none;
+        }
+        
+        .divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, #b8945f, transparent);
+            margin: 30px 0;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                margin: 20px;
+            }
+            
+            .header {
+                padding: 30px 20px;
+            }
+            
+            .header h1 {
+                font-size: 24px;
+            }
+            
+            .content {
+                padding: 30px 20px;
+            }
+            
+            .tech-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>ARKANA STORE</h1>
+            <p class="subtitle">E-commerce Premium · Rust + WASM</p>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <p class="greeting">
+                Olá! 👋
+            </p>
+
+            <!-- Introdução -->
+            <div class="section">
+                <h2>🎯 Bem-vindo ao Projeto</h2>
+                <p>
+                    Você foi adicionado como <strong>colaborador</strong> do repositório <strong>ArkanaStore</strong>, 
+                    um e-commerce moderno construído com tecnologias de ponta e infraestrutura 100% gratuita.
+                </p>
+                <p>
+                    Este é um projeto da <strong>Ávila Inc</strong> que combina performance, segurança e DevOps moderno 
+                    para criar uma plataforma de vendas de moda contemporânea premium.
+                </p>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Visão Geral do Projeto -->
+            <div class="section">
+                <h2>📦 O Projeto</h2>
+                <p>
+                    O <strong>Arkana Store</strong> é uma plataforma completa de e-commerce com:
+                </p>
+            </div>
+
+            <div class="features">
+                <h3>✨ CARACTERÍSTICAS PRINCIPAIS</h3>
+                <ul>
+                    <li>Frontend em Yew (Rust WASM) - performance nativa no browser</li>
+                    <li>Backend em Actix-web (Rust) - alta performance e segurança</li>
+                    <li>MongoDB 7.0 - database NoSQL flexível</li>
+                    <li>Redis 7 - cache ultra-rápido</li>
+                    <li>MinIO - storage S3-compatible para imagens</li>
+                    <li>Traefik - reverse proxy com SSL automático</li>
+                    <li>Stack de monitoring completa (Prometheus + Grafana + Loki)</li>
+                    <li>CI/CD automatizado com GitHub Actions</li>
+                </ul>
+            </div>
+
+            <!-- Stack Técnica -->
+            <div class="tech-stack">
+                <h3>🛠️ Stack Tecnológica</h3>
+                <div class="tech-list">
+                    <div class="tech-item">Rust 1.70+</div>
+                    <div class="tech-item">Yew 0.21 (WASM)</div>
+                    <div class="tech-item">Actix-web 4.4</div>
+                    <div class="tech-item">MongoDB 7.0</div>
+                    <div class="tech-item">Redis 7</div>
+                    <div class="tech-item">Docker Compose</div>
+                    <div class="tech-item">GitHub Actions</div>
+                    <div class="tech-item">Traefik v3</div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Acesso -->
+            <div class="section">
+                <h2>🔑 Acesso ao Repositório</h2>
+                <p>
+                    Você agora tem <strong>permissões de push</strong> no repositório. 
+                    Isso significa que você pode:
+                </p>
+                <ul style="color: #666; padding-left: 20px; margin-top: 10px;">
+                    <li>Clonar o repositório</li>
+                    <li>Criar branches</li>
+                    <li>Fazer commits e push</li>
+                    <li>Criar Pull Requests</li>
+                    <li>Revisar código</li>
+                </ul>
+            </div>
+
+            <div class="credentials">
+                <h3>📍 Repositório GitHub</h3>
+                <p>
+                    <strong>URL:</strong> <code>https://github.com/avilaops/ArkanaStore</code>
+                </p>
+                <p style="margin-top: 10px;">
+                    <strong>Clone via:</strong><br>
+                    <code>git clone https://github.com/avilaops/ArkanaStore.git</code>
+                </p>
+            </div>
+
+            <!-- Quick Start -->
+            <div class="section">
+                <h2>🚀 Quick Start</h2>
+                <p><strong>1. Clone o repositório:</strong></p>
+                <pre style="background: #f8f8f8; padding: 15px; border-radius: 6px; overflow-x: auto; font-size: 13px;">
+git clone https://github.com/avilaops/ArkanaStore.git
+cd ArkanaStore</pre>
+
+                <p style="margin-top: 15px;"><strong>2. Configure o ambiente:</strong></p>
+                <pre style="background: #f8f8f8; padding: 15px; border-radius: 6px; overflow-x: auto; font-size: 13px;">
+cp .env.example .env
+# Edite .env com suas credenciais</pre>
+
+                <p style="margin-top: 15px;"><strong>3. Suba a stack completa:</strong></p>
+                <pre style="background: #f8f8f8; padding: 15px; border-radius: 6px; overflow-x: auto; font-size: 13px;">
+docker-compose -f docker-compose.avila-full.yml up -d</pre>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Links Importantes -->
+            <div class="section">
+                <h2>🔗 Links Importantes</h2>
+                <ul style="color: #666; padding-left: 20px;">
+                    <li><strong>Demo Live:</strong> <a href="https://avilaops.github.io/ArkanaStore/" style="color: #b8945f;">https://avilaops.github.io/ArkanaStore/</a></li>
+                    <li><strong>Documentação:</strong> README.md no repositório</li>
+                    <li><strong>CI/CD:</strong> GitHub Actions workflows</li>
+                    <li><strong>Monitoring:</strong> Grafana + Prometheus + Loki</li>
+                </ul>
+            </div>
+
+            <!-- Estrutura do Projeto -->
+            <div class="section">
+                <h2>📂 Estrutura do Projeto</h2>
+                <pre style="background: #f8f8f8; padding: 15px; border-radius: 6px; overflow-x: auto; font-size: 12px; line-height: 1.4;">
+ArkanaStore/
+├── arkana-backend/         # API Rust (Actix-web)
+├── arkana-frontend/        # SPA Yew (WASM)
+├── arkana-shared/          # Código compartilhado
+├── docs/                   # Site GitHub Pages
+├── monitoring/             # Prometheus/Grafana/Loki
+├── .github/workflows/      # CI/CD
+└── docker-compose.avila-full.yml</pre>
+            </div>
+
+            <!-- Call to Action -->
+            <div class="cta-section">
+                <h3>🎯 Próximos Passos</h3>
+                <p style="color: #666; margin-bottom: 20px;">
+                    Aceite o convite no GitHub e comece a contribuir!
+                </p>
+                <a href="https://github.com/avilaops/ArkanaStore" class="btn">
+                    Ver Repositório
+                </a>
+                <a href="https://avilaops.github.io/ArkanaStore/" class="btn btn-secondary">
+                    Ver Demo Live
+                </a>
+            </div>
+
+            <!-- Contato -->
+            <div class="section">
+                <h2>📞 Suporte</h2>
+                <p>
+                    Dúvidas ou problemas? Entre em contato:
+                </p>
+                <ul style="color: #666; padding-left: 20px; margin-top: 10px;">
+                    <li><strong>Email:</strong> dev@avila.inc</li>
+                    <li><strong>WhatsApp:</strong> (17) 99665-6163</li>
+                    <li><strong>Portal:</strong> <a href="https://portal.avila.inc" style="color: #b8945f;">portal.avila.inc</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p><strong>Ávila Inc</strong></p>
+            <p>Stack 100% Gratuita | Performance Nativa | DevOps Moderno</p>
+            <p style="margin-top: 15px; font-size: 12px;">
+                © 2025 Ávila Inc. Todos os direitos reservados.
+            </p>
+        </div>
+    </div>
+</body>
+</html>
