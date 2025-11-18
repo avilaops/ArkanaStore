@@ -1,0 +1,115 @@
+# .gitignore - Ávila Inc Padrão de Atendimento
+
+# ====================================
+# DADOS SENSÍVEIS - NUNCA COMMITAR
+# ====================================
+
+# Dossiês com dados confidenciais (se houver versão local não anonimizada)
+clientes/**/dossie_completo_pii.md
+clientes/**/dados_sensiveis/
+
+# Credenciais e segredos
+*.key
+*.pem
+*.p12
+*.pfx
+secrets/
+.env
+.env.local
+.env.*.local
+
+# Documentos com PII
+**/cpf_*.pdf
+**/rg_*.pdf
+**/dados_bancarios*.xlsx
+**/contratos_assinados_originais/
+
+# ====================================
+# ARQUIVOS TEMPORÁRIOS
+# ====================================
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+ENV/
+.venv
+pip-log.txt
+
+# Jupyter Notebooks checkpoints
+.ipynb_checkpoints
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+*.log
+logs/
+*.log.*
+
+# Outputs temporários de scripts
+relatorio_analise_conversa.md.tmp
+*.tmp
+*.bak
+
+# ====================================
+# BUILDS E DEPENDÊNCIAS
+# ====================================
+
+dist/
+build/
+*.egg-info/
+node_modules/
+
+# ====================================
+# ESPECÍFICO DO PROJETO
+# ====================================
+
+# Rascunhos pessoais
+drafts/
+rascunhos/
+notas_pessoais/
+
+# Screenshots com dados sensíveis
+screenshots_clientes/
+IMG-*.jpg
+WA*.jpg
+
+# Relatórios com dados reais (commitar apenas versões anonimizadas)
+relatorios/*_real.pdf
+relatorios/*_confidencial.pdf
+
+# Backups locais
+backup/
+*.backup
+
+# ====================================
+# PERMITIDO (Comentado para clareza)
+# ====================================
+
+# ✅ Dossiês anonimizados
+# clientes/arkana_store/dossie.md (OK se dados forem pseudonimizados)
+
+# ✅ Scripts e playbooks
+# scripts/*.md
+# playbooks/*.md
+
+# ✅ Documentação
+# *.md (exceto os listados acima)
+
+# ✅ Prompts de IA (sem dados de clientes)
+# ia_assistiva/prompts_*.md
+
+# ====================================
+# REGRA DE OURO
+# ====================================
+# Quando em dúvida, NÃO commite.
+# Pergunte ao DPO ou supervisor antes.

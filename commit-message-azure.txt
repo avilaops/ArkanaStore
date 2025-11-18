@@ -1,0 +1,45 @@
+feat(azure): Infraestrutura completa + CI/CD Azure deployment
+
+Admin Panel atualizado:
+- Identidade visual real boutique Arkana
+- Paleta terrosa (bege/madeira/concreto/grafite)
+- Tipografia Montserrat + Inter
+- Logo circular minimalista
+- Textura madeira e concreto sutis
+
+GitHub Actions Workflow:
+- Deploy automatico Azure Web App
+- Trigger em push main
+- Build Python 3.11 + Node.js 18
+- Package deployment completo
+- Configure app settings automatico
+
+Infraestrutura Bicep:
+- App Service Plan (Linux B1)
+- Web App (Python 3.11)
+- Storage Account (backups/uploads)
+- Application Insights (monitoring)
+- Log Analytics Workspace
+
+Scripts Deploy:
+- scripts/deploy-azure.ps1 (PowerShell completo)
+- Provisioning automatizado
+- Health checks
+- Logs streaming
+
+Documentacao:
+- DEPLOY_AZURE.md (guia 700+ linhas)
+- infra/README.md (IaC docs)
+- 3 opcoes deploy (Actions/Script/Manual)
+
+Arquivos criados:
+- .github/workflows/azure-deploy.yml
+- infra/main.bicep
+- infra/main.parameters.json
+- infra/README.md
+- scripts/deploy-azure.ps1
+- DEPLOY_AZURE.md
+
+Custo estimado: R$ 75/mes (B1) ou GRATIS (F1)
+
+Co-authored-by: Avila Inc <dev@avila.inc>

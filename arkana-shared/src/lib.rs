@@ -1,11 +1,11 @@
-//! # ??? ARKANA SHARED - Types & Domain Models
-//! 
+//! # ARKANA SHARED - Types & Domain Models
+//!
 //! Tipos compartilhados entre backend (API Rust) e frontend (Yew WASM)
-//! 
-//! ## Módulos:
-//! - `product`: Produtos maçônicos (camisetas, bermudas, acessórios)
+//!
+//! ## Modulos:
+//! - `product`: Produtos maconicos
 //! - `order`: Pedidos e carrinho
-//! - `payment`: Integrações pagamento
+//! - `payment`: Integracoes pagamento
 //! - `customer`: Dados do cliente
 
 use serde::{Deserialize, Serialize};
@@ -13,7 +13,7 @@ use uuid::Uuid;
 use chrono::{DateTime, Utc};
 
 // ===================================================================
-// PRODUTO (Camisetas, Bermudas, Acessórios Maçônicos)
+// PRODUTO (Camisetas, Bermudas, Acessorios Maconicos)
 // ===================================================================
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
@@ -27,7 +27,7 @@ pub struct Product {
     pub stock: u32,
     pub images: Vec<String>,
     pub sizes: Option<Vec<String>>, // Para camisetas/bermudas
-    pub masonic_symbols: Vec<String>, // Símbolos maçônicos no produto
+    pub masonic_symbols: Vec<String>, // Simbolos maconicos no produto
     pub metadata: ProductMetadata,
     pub created_at: DateTime<Utc>,
     pub updated_at: DateTime<Utc>,
@@ -36,10 +36,10 @@ pub struct Product {
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 #[serde(rename_all = "snake_case")]
 pub enum ProductCategory {
-    Camiseta,        // Camisetas maçônicas
+    Camiseta,        // Camisetas maconicas
     Bermuda,         // Bermudas
-    Acessorio,       // Anéis, pingentes, pins
-    Bone,            // Bonés
+    Acessorio,       // Aneis, pingentes, pins
+    Bone,            // Bones
     Conjunto,        // Kits
     Outros,
 }
@@ -50,7 +50,7 @@ pub struct ProductMetadata {
     pub dimensoes_cm: Option<(u32, u32, u32)>, // (L, A, P)
     pub material: Option<String>,
     pub grau_maconico: Option<String>, // Ex: "Aprendiz", "Companheiro", "Mestre"
-    pub rito: Option<String>, // Ex: "REAA", "Escocês", "York"
+    pub rito: Option<String>, // Ex: "REAA", "Escoces", "York"
 }
 
 // ===================================================================
@@ -109,7 +109,7 @@ pub struct OrderItem {
 pub enum OrderStatus {
     PendingPayment,     // Aguardando pagamento
     PaymentApproved,    // Pagamento aprovado
-    Processing,         // Em separação
+    Processing,         // Em separaï¿½ï¿½o
     Shipped,           // Enviado
     Delivered,         // Entregue
     Cancelled,         // Cancelado
@@ -170,9 +170,9 @@ pub struct Customer {
     pub name: String,
     pub phone: String,
     pub cpf: Option<String>,
-    pub is_mason: bool, // Cliente é maçom? (desconto especial)
-    pub lodge_name: Option<String>, // Nome da loja maçônica
-    pub masonic_degree: Option<String>, // Grau maçônico
+    pub is_mason: bool, // Cliente e macom? (desconto especial)
+    pub lodge_name: Option<String>, // Nome da loja maconica
+    pub masonic_degree: Option<String>, // Grau maconico
     pub created_at: DateTime<Utc>,
 }
 
@@ -241,19 +241,19 @@ impl<T> ApiResponse<T> {
 
 #[derive(Debug, thiserror::Error)]
 pub enum ArkanaError {
-    #[error("Produto não encontrado: {0}")]
+    #[error("Produto nao encontrado: {0}")]
     ProductNotFound(Uuid),
 
-    #[error("Estoque insuficiente: {0} disponível, {1} solicitado")]
+    #[error("Estoque insuficiente: {0} disponivel, {1} solicitado")]
     InsufficientStock(u32, u32),
 
-    #[error("Pedido não encontrado: {0}")]
+    #[error("Pedido nao encontrado: {0}")]
     OrderNotFound(Uuid),
 
     #[error("Pagamento falhou: {0}")]
     PaymentFailed(String),
 
-    #[error("Erro de validação: {0}")]
+    #[error("Erro de validacao: {0}")]
     ValidationError(String),
 
     #[error("Erro interno: {0}")]

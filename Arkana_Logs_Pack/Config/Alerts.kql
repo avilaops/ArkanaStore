@@ -1,0 +1,19 @@
+
+// P0 - Many 5xx in Functions
+requests
+| where toint(resultCode) between (500 .. 599)
+| summarize count() by bin(timestamp, 1m)
+
+// P1 - No webhook in 15 minutes
+customEvents
+| where name == "mp_webhook_received"
+| summarize count() by bin(timestamp, 15m)
+
+// P2 - High payment failure rate
+let failures = customEvents | where name == "payment_failed" | summarize fails=count() by bin(timestamp, 10m);
+let successes = customEvents | where name == "purchase_approved" | summarize ok=count() by bin(timestamp, 10m);
+failures
+| join kind=fullouter successes on timestamp
+| extend ok = coalesce(ok, 0), fails = coalesce(fails, 0)
+| extend rate = todouble(fails) / todouble(iif(ok==0, 1, ok))
+| project timestamp, fails, ok, rate

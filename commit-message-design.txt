@@ -1,0 +1,29 @@
+feat(design): Identidade visual real da boutique Arkana
+
+Redesign completo baseado nas fotos da loja fisica
+
+Paleta terrosa:
+- Bege, madeira, concreto, grafite
+- Ouro sutil (nao amarelo brilhante)
+- Tons naturais e aconchegantes
+
+Design minimalista:
+- Logo circular A ARKANA (como na parede)
+- Sem simbolos maconicos visiveis
+- Tipografia sans-serif clean
+- Texturas sutis (madeira/concreto)
+- Vigas madeira escura no teto
+- Iluminacao quente pontual
+
+Modos tema:
+- Claro: bege aconchegante (foto 1)
+- Escuro: preto fosco com vigas (foto 2)
+
+Sites atualizados:
+- arkana-store-v2.html (com modal cadastro)
+- arkana-store-landing.html (showcase)
+
+Documentacao:
+- IDENTIDADE_VISUAL_ARKANA_REAL.md (guia 600+ linhas)
+
+Co-authored-by: Avila Inc <dev@avila.inc>

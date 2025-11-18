@@ -35,13 +35,13 @@ COPY --from=builder /app/arkana-frontend/dist /usr/share/nginx/html
 RUN echo 'server { \
     listen 80; \
     location / { \
-        root /usr/share/nginx/html; \
-        try_files $uri $uri/ /index.html; \
+    root /usr/share/nginx/html; \
+    try_files $uri $uri/ /index.html; \
     } \
     location /api { \
-        proxy_pass http://arkana-api:8000; \
+    proxy_pass http://arkana-api:8000; \
     } \
-}' > /etc/nginx/conf.d/default.conf
+    }' > /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 

@@ -1,61 +1,76 @@
 /* ===================================================================
    ??? ARKANA STORE - ESTILOS PRINCIPAIS (Rust + WASM)
-   =================================================================== 
-   
-   Tema: Maçonaria + Elegância
+   ===================================================================
+
+   Tema: Maï¿½onaria + Elegï¿½ncia
    Cores: Azul escuro, dourado, branco
-   Tipografia: Cinzel (títulos), Open Sans (corpo)
-   
+   Tipografia: Cinzel (tï¿½tulos), Open Sans (corpo)
+
    Data: 16/11/2025
-   Versão: 1.0.0
+   Versï¿½o: 1.0.0
 */
 
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Open+Sans:wght@300;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Inter:wght@300;400;600;700&display=swap');
 
 /* ===================================================================
-   VARIÁVEIS CSS
+   VARIï¿½VEIS CSS
    =================================================================== */
 
 :root {
-    /* Cores principais (Tema Maçônico) */
-    --color-primary: #1a237e;      /* Azul escuro maçônico */
-    --color-secondary: #ffd700;    /* Dourado */
-    --color-accent: #c41e3a;       /* Vermelho (detalhes) */
-    
-    /* Tons de cinza */
-    --color-dark: #1a1a1a;
-    --color-gray: #666666;
-    --color-light-gray: #e0e0e0;
-    --color-white: #ffffff;
-    
+    /* Paleta Arkana Real - Baseada na loja fisica */
+    --concrete: #d4cec5;        /* Concreto/cimento queimado */
+    --warm-beige: #e8dfd3;      /* Bege quente das paredes */
+    --off-white: #f5f2ed;       /* Bege claro geral */
+
+    /* Madeiras */
+    --wood-light: #c19a6b;      /* Madeira clara (prateleiras) */
+    --wood-medium: #8b6f47;     /* Madeira media (piso) */
+    --wood-dark: #5c4a3a;       /* Madeira escura (vigas) */
+
+    /* Escuros */
+    --graphite: #2a2a2a;        /* Grafite (teto) */
+    --charcoal: #1a1a1a;        /* Carvao (preto fosco) */
+    --warm-gray: #6b6357;       /* Cinza quente */
+
+    /* Acento */
+    --accent-gold: #b8945f;     /* Ouro sutil (iluminacao) */
+
+    /* Aliases para compatibilidade */
+    --color-primary: var(--graphite);
+    --color-secondary: var(--accent-gold);
+    --color-dark: var(--charcoal);
+    --color-gray: var(--warm-gray);
+    --color-light-gray: var(--concrete);
+    --color-white: var(--off-white);
+
     /* Gradientes */
-    --gradient-primary: linear-gradient(135deg, #1a237e 0%, #283593 100%);
-    --gradient-gold: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
-    --gradient-dark: linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.9) 100%);
-    
+    --gradient-primary: linear-gradient(135deg, var(--charcoal) 0%, var(--graphite) 100%);
+    --gradient-gold: linear-gradient(135deg, var(--accent-gold) 0%, var(--wood-light) 100%);
+    --gradient-dark: linear-gradient(180deg, rgba(26,26,26,0.8) 0%, rgba(26,26,26,0.95) 100%);
+
     /* Tipografia */
-    --font-heading: 'Cinzel', serif;
-    --font-body: 'Open Sans', sans-serif;
-    
-    /* Espaçamentos */
+    --font-heading: 'Montserrat', sans-serif;
+    --font-body: 'Inter', sans-serif;
+
+    /* Espaï¿½amentos */
     --spacing-xs: 0.5rem;
     --spacing-sm: 1rem;
     --spacing-md: 2rem;
     --spacing-lg: 4rem;
     --spacing-xl: 6rem;
-    
+
     /* Bordas */
     --radius-sm: 4px;
     --radius-md: 8px;
     --radius-lg: 16px;
-    
+
     /* Sombras */
     --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
     --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
     --shadow-lg: 0 10px 25px rgba(0,0,0,0.15);
     --shadow-xl: 0 20px 40px rgba(0,0,0,0.2);
-    
-    /* Transições */
+
+    /* Transiï¿½ï¿½es */
     --transition-fast: 0.2s ease;
     --transition-normal: 0.3s ease;
     --transition-slow: 0.5s ease;
@@ -78,17 +93,32 @@ html {
 
 body {
     font-family: var(--font-body);
-    color: var(--color-dark);
+    color: var(--graphite);
     line-height: 1.6;
-    background-color: var(--color-white);
+    background-color: var(--off-white);
     overflow-x: hidden;
+}
+
+body.dark-mode {
+    background-color: var(--charcoal);
+    color: var(--off-white);
 }
 
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
-    font-weight: 700;
+    font-weight: 300;
     line-height: 1.2;
-    color: var(--color-primary);
+    color: var(--graphite);
+    letter-spacing: 0.05em;
+}
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode h6 {
+    color: var(--off-white);
 }
 
 a {
@@ -120,14 +150,26 @@ img {
     align-items: center;
     justify-content: center;
     text-align: center;
-    background: var(--gradient-primary);
-    background-image: 
-        url('/assets/patterns/masonic-pattern.svg'),
-        var(--gradient-primary);
-    background-size: cover;
-    background-position: center;
-    color: var(--color-white);
+    background: var(--charcoal);
+    color: var(--off-white);
     overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 12px;
+    background: repeating-linear-gradient(
+        90deg,
+        var(--wood-dark) 0%,
+        var(--wood-dark) 15%,
+        var(--charcoal) 15%,
+        var(--charcoal) 20%
+    );
+    z-index: 1;
 }
 
 .hero-overlay {
@@ -147,12 +189,43 @@ img {
     padding: var(--spacing-lg);
 }
 
-.hero-symbol {
-    font-size: 6rem;
-    margin-bottom: var(--spacing-md);
-    color: var(--color-secondary);
-    text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
-    animation: pulse 3s ease-in-out infinite;
+.hero-logo {
+    margin-bottom: var(--spacing-lg);
+}
+
+.logo-circle {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+    border: 2px solid var(--accent-gold);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(212, 206, 197, 0.03);
+    backdrop-filter: blur(10px);
+    transition: var(--transition-normal);
+}
+
+.logo-circle:hover {
+    border-color: var(--wood-light);
+    transform: scale(1.05);
+}
+
+.logo-letter {
+    font-size: 4.5rem;
+    font-weight: 300;
+    color: var(--accent-gold);
+    line-height: 1;
+    margin-bottom: 0.2rem;
+}
+
+.logo-text {
+    font-size: 1.5rem;
+    font-weight: 400;
+    letter-spacing: 0.3em;
+    color: var(--accent-gold);
 }
 
 @keyframes pulse {
@@ -161,21 +234,20 @@ img {
 }
 
 .hero-title {
-    font-size: 4rem;
-    font-weight: 700;
-    margin-bottom: var(--spacing-sm);
-    color: var(--color-white);
-    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-    letter-spacing: 2px;
+    font-size: 3rem;
+    font-weight: 300;
+    margin-bottom: var(--spacing-md);
+    color: var(--off-white);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
 }
 
 .hero-subtitle {
-    font-size: 1.8rem;
-    font-weight: 600;
-    color: var(--color-secondary);
-    margin-bottom: var(--spacing-md);
-    text-transform: uppercase;
-    letter-spacing: 3px;
+    font-size: 1.3rem;
+    font-weight: 300;
+    color: var(--wood-light);
+    margin-bottom: var(--spacing-lg);
+    letter-spacing: 0.1em;
 }
 
 .hero-description {
@@ -210,7 +282,7 @@ img {
 }
 
 /* ===================================================================
-   BOTÕES
+   BOTï¿½ES
    =================================================================== */
 
 .btn {
@@ -228,25 +300,30 @@ img {
 }
 
 .btn-primary {
-    background: var(--gradient-gold);
-    color: var(--color-dark);
-    box-shadow: var(--shadow-md);
+    background: var(--accent-gold);
+    color: var(--charcoal);
+    box-shadow: none;
+    border: 1px solid var(--accent-gold);
+    letter-spacing: 0.15em;
 }
 
 .btn-primary:hover {
+    background: var(--wood-light);
+    border-color: var(--wood-light);
     transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
 }
 
 .btn-secondary {
     background: transparent;
-    color: var(--color-white);
-    border: 2px solid var(--color-secondary);
+    color: var(--off-white);
+    border: 1px solid var(--concrete);
+    letter-spacing: 0.15em;
 }
 
 .btn-secondary:hover {
-    background: var(--color-secondary);
-    color: var(--color-dark);
+    background: var(--concrete);
+    color: var(--charcoal);
+    border-color: var(--concrete);
 }
 
 .btn-outline {
@@ -449,7 +526,7 @@ img {
 }
 
 /* ===================================================================
-   SOBRE A MAÇONARIA
+   SOBRE A MAï¿½ONARIA
    =================================================================== */
 
 .about-masonry {
@@ -499,7 +576,7 @@ img {
 }
 
 /* ===================================================================
-   BENEFÍCIOS
+   BENEFï¿½CIOS
    =================================================================== */
 
 .benefits {
@@ -655,7 +732,7 @@ img {
 }
 
 /* ===================================================================
-   SÍMBOLOS RODAPÉ
+   Sï¿½MBOLOS RODAPï¿½
    =================================================================== */
 
 .masonic-symbols-footer {
@@ -689,23 +766,23 @@ img {
     .hero-title {
         font-size: 2.5rem;
     }
-    
+
     .hero-subtitle {
         font-size: 1.2rem;
     }
-    
+
     .hero-cta {
         flex-direction: column;
     }
-    
+
     .about-content {
         grid-template-columns: 1fr;
     }
-    
+
     .section-title {
         font-size: 2rem;
     }
-    
+
     .categories-grid,
     .benefits-grid,
     .testimonials-grid {
@@ -714,7 +791,7 @@ img {
 }
 
 /* ===================================================================
-   ANIMAÇÕES E EFEITOS
+   ANIMAï¿½ï¿½ES E EFEITOS
    =================================================================== */
 
 @keyframes fadeIn {

@@ -1,0 +1,13 @@
+[[package]]
+name = "arkana-store"
+version = "1.0.0"
+
+[build-system]
+requires = ["trunk"]
+
+[tool.trunk]
+title = "Arkana Store - Produtos Maçônicos"
+description = "E-commerce de alta performance para produtos maçônicos"
+
+[[tool.trunk.assets]]
+path = "static"
