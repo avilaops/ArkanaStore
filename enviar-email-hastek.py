@@ -65,7 +65,7 @@ def enviar_email_hastek():
     
     Dúvidas? Entre em contato:
     - Email: dev@avila.inc
-    - WhatsApp: (17) 99665-6163
+    - WhatsApp: (17) 99781-1471
     
     Ávila Inc
     """

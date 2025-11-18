@@ -69,23 +69,31 @@ async fn main() -> std::io::Result<()> {
     });
 
     let bind_addr = format!("0.0.0.0:{}", config.port);
+    
+    // CORS origins de variáveis de ambiente (produção vs desenvolvimento)
+    let cors_origins = std::env::var("CORS_ORIGINS")
+        .unwrap_or_else(|_| "http://localhost:8080,http://localhost:3000".to_string());
 
     info!("========================================");
     info!("ARKANA STORE API RODANDO");
     info!("========================================");
     info!("Endereco: http://{}", bind_addr);
+    info!("CORS Origins: {}", cors_origins);
     info!("========================================");
 
     HttpServer::new(move || {
-        let cors = Cors::default()
-            .allowed_origin("https://arkanastore.com.br")
-            .allowed_origin("http://localhost:8080")
+        let mut cors = Cors::default()
             .allowed_methods(vec!["GET", "POST", "PUT", "DELETE"])
             .allowed_headers(vec![
                 actix_web::http::header::AUTHORIZATION,
                 actix_web::http::header::CONTENT_TYPE,
             ])
             .max_age(3600);
+        
+        // Adicionar cada origem configurada
+        for origin in cors_origins.split(',') {
+            cors = cors.allowed_origin(origin.trim());
+        }
 
         App::new()
             .app_data(app_state.clone())
