@@ -1,19 +1,19 @@
 /* ===================================================================
-   ??? ARKANA STORE - ESTILOS PRINCIPAIS (Rust + WASM)
+   🏪 ARKANA STORE - ESTILOS PRINCIPAIS (Rust + WASM)
    ===================================================================
 
-   Tema: Ma�onaria + Eleg�ncia
+   Tema: Maçonaria + Elegância
    Cores: Azul escuro, dourado, branco
-   Tipografia: Cinzel (t�tulos), Open Sans (corpo)
+   Tipografia: Cinzel (títulos), Open Sans (corpo)
 
    Data: 16/11/2025
-   Vers�o: 1.0.0
+   Versão: 1.0.0
 */
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Inter:wght@300;400;600;700&display=swap');
 
 /* ===================================================================
-   VARI�VEIS CSS
+   VARIÁVEIS CSS
    =================================================================== */
 
 :root {
@@ -52,7 +52,7 @@
     --font-heading: 'Montserrat', sans-serif;
     --font-body: 'Inter', sans-serif;
 
-    /* Espa�amentos */
+    /* Espaçamentos */
     --spacing-xs: 0.5rem;
     --spacing-sm: 1rem;
     --spacing-md: 2rem;
@@ -70,7 +70,7 @@
     --shadow-lg: 0 10px 25px rgba(0,0,0,0.15);
     --shadow-xl: 0 20px 40px rgba(0,0,0,0.2);
 
-    /* Transi��es */
+    /* Transições */
     --transition-fast: 0.2s ease;
     --transition-normal: 0.3s ease;
     --transition-slow: 0.5s ease;
@@ -282,7 +282,7 @@ img {
 }
 
 /* ===================================================================
-   BOT�ES
+   BOTÕES
    =================================================================== */
 
 .btn {
@@ -526,7 +526,7 @@ img {
 }
 
 /* ===================================================================
-   SOBRE A MA�ONARIA
+   SOBRE A MAÇONARIA
    =================================================================== */
 
 .about-masonry {
@@ -576,7 +576,7 @@ img {
 }
 
 /* ===================================================================
-   BENEF�CIOS
+   BENEFÍCIOS
    =================================================================== */
 
 .benefits {
@@ -732,7 +732,7 @@ img {
 }
 
 /* ===================================================================
-   S�MBOLOS RODAP�
+   SÍMBOLOS RODAPÉ
    =================================================================== */
 
 .masonic-symbols-footer {
@@ -791,7 +791,7 @@ img {
 }
 
 /* ===================================================================
-   ANIMA��ES E EFEITOS
+   ANIMAÇÕES E EFEITOS
    =================================================================== */
 
 @keyframes fadeIn {

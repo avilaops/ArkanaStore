@@ -39,7 +39,7 @@ RUN echo 'server { \
     try_files $uri $uri/ /index.html; \
     } \
     location /api { \
-    proxy_pass http://arkana-api:8000; \
+    proxy_pass http://arkana-api:8080; \
     } \
     }' > /etc/nginx/conf.d/default.conf
 
