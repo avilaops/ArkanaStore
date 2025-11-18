@@ -15,31 +15,6 @@ jobs:
     name: Test
     runs-on: ubuntu-latest
 
-    services:
-      mongodb:
-        image: mongo:7.0
-        env:
-          MONGO_INITDB_ROOT_USERNAME: test
-          MONGO_INITDB_ROOT_PASSWORD: test
-          MONGO_INITDB_DATABASE: arkana_test
-        options: >-
-          --health-cmd "mongosh --eval 'db.adminCommand(\"ping\")'"
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-        ports:
-          - 27017:27017
-
-      redis:
-        image: redis:7-alpine
-        options: >-
-          --health-cmd "redis-cli ping"
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-        ports:
-          - 6379:6379
-
     steps:
     - uses: actions/checkout@v4
 
@@ -62,8 +37,10 @@ jobs:
     - name: Run tests
       run: cargo test --all
       env:
-        MONGODB_URI: mongodb://test:test@localhost:27017/arkana_test?authSource=admin
-        REDIS_URL: redis://localhost:6379
+        MONGODB_URI: ${{ secrets.MONGO_ATLAS_URI }}
+        REDIS_URL: ${{ secrets.REDIS_URL }}
+        JWT_SECRET: ${{ secrets.JWT_SECRET }}
+        SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
 
   build-backend:
     name: Build Backend

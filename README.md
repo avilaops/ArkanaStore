@@ -1,6 +1,6 @@
 # 🏪 ARKANA STORE
 
-> **E-commerce Premium de Moda Contemporânea**  
+> **E-commerce Premium de Moda Contemporânea**
 > Stack 100% Gratuita | Rust + WASM + MongoDB + Docker
 
 [![CI/CD](https://github.com/avilaops/ArkanaStore/actions/workflows/ci.yml/badge.svg)](https://github.com/avilaops/ArkanaStore/actions/workflows/ci.yml)
@@ -437,9 +437,9 @@ Este projeto é **privado** e de propriedade da **Ávila Inc**.
 
 ## 📞 Contato
 
-**Ávila Inc**  
-- 📧 Email: dev@avila.inc  
-- 📱 WhatsApp: (17) 99665-6163  
+**Ávila Inc**
+- 📧 Email: dev@avila.inc
+- 📱 WhatsApp: (17) 99665-6163
 - 🌐 Portal: https://portal.avila.inc
 
 ---
